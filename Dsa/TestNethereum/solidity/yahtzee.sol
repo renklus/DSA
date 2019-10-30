@@ -8,9 +8,9 @@ contract Yahtzee {
 
     function () external payable { }
 
-    constructor (address payable me, address partner, uint stake) public payable {
+    constructor (address payable partner, uint stake) public payable {
         require(msg.value >= stake, "Not enough stake provided");
-        _owner = me;
+        _owner = msg.sender;
         _partner = partner;
     }
 
