@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Net;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Nethereum.Web3;
 using Nethereum.Web3.Accounts;
@@ -19,9 +21,19 @@ namespace ConsoleStartup
             try
             {
                 // Setup
-                // Here we're using local chain eg Geth https://github.com/Nethereum/TestChains#geth
-                var url = "http://localhost:8545";
-                var privateKey = "0xb5b1870957d373ef0eeffecc6e4812c0fd08f554b37b233526acc331bf1544f7";
+                // Using local chain eg Geth https://github.com/Nethereum/TestChains#geth
+
+                //Using Infura: 
+                //var url = "http://rinkeby.infura.io/v3/11f60370f16f4db397a95e796caa9009";
+                //var privateKey = "92bb42f449564cc2ac53576951dc9fb4";
+                //var account = new Account(privateKey);
+                //var web3 = new Web3(account, url);
+                //ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
+
+                var privateAddress = "0x45a0f6233B9fA641ee2FefA0f567d66376FDA0fe";
+                var url = "https://rinkeby.infura.io/v3/11f60370f16f4db397a95e796caa9009";
+                var privateKey = Settings.Settings.PrivateKey;
                 var account = new Account(privateKey);
                 var web3 = new Web3(account, url);
 
@@ -35,7 +47,7 @@ namespace ConsoleStartup
 
                 Console.WriteLine("Sending a transaction to the function set()...");
                 var receiptForSetFunctionCall = await service.SetRequestAndWaitForReceiptAsync(
-                    new SetFunction() { X = 42, Gas = 400000 });
+                    new SetFunction() { X = 42 });
                 Console.WriteLine($"Finished storing an int: Tx Hash: {receiptForSetFunctionCall.TransactionHash}");
                 Console.WriteLine($"Finished storing an int: Tx Status: {receiptForSetFunctionCall.Status.Value}");
                 Console.WriteLine("");
