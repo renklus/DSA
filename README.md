@@ -1,5 +1,6 @@
-# Step by step
+# Links
 https://medium.com/coinmonks/a-net-developers-workflow-for-creating-and-calling-ethereum-smart-contracts-44714f191db2
+https://hackernoon.com/how-to-generate-random-numbers-in-solidity-lh7rj39s9
 
 # Installationsanleitung
 Visual Studio Code mit dem Plugin 'solidity' (https://marketplace.visualstudio.com/items?itemName=JuanBlanco.solidity) wird verwendet um den Solidity Contract zu schreiben. Das Plugin erstellt aus dem .sol File .abi und .bin Files.
