@@ -10,21 +10,21 @@ using Nethereum.Contracts.CQS;
 using Nethereum.Contracts;
 using System.Threading;
 
-namespace TestNethereum.SimpleStorage.ContractDefinition
+namespace YahtzeeContract.Yahtzee.ContractDefinition
 {
 
 
-    public partial class SimpleStorageDeployment : SimpleStorageDeploymentBase
+    public partial class YahtzeeDeployment : YahtzeeDeploymentBase
     {
-        public SimpleStorageDeployment() : base(BYTECODE) { }
-        public SimpleStorageDeployment(string byteCode) : base(byteCode) { }
+        public YahtzeeDeployment() : base(BYTECODE) { }
+        public YahtzeeDeployment(string byteCode) : base(byteCode) { }
     }
 
-    public class SimpleStorageDeploymentBase : ContractDeploymentMessage
+    public class YahtzeeDeploymentBase : ContractDeploymentMessage
     {
-        public static string BYTECODE = "6080604052348015600f57600080fd5b5060ab8061001e6000396000f3fe6080604052348015600f57600080fd5b506004361060325760003560e01c806360fe47b11460375780636d4ce63c146053575b600080fd5b605160048036036020811015604b57600080fd5b5035606b565b005b60596070565b60408051918252519081900360200190f35b600055565b6000549056fea265627a7a7231582049a16c17662989f3f5631dcbfc23731babf28fd038595acac6efa3c697807ef364736f6c634300050b0032";
-        public SimpleStorageDeploymentBase() : base(BYTECODE) { }
-        public SimpleStorageDeploymentBase(string byteCode) : base(byteCode) { }
+        public static string BYTECODE = "6080604052348015600f57600080fd5b5060ab8061001e6000396000f3fe6080604052348015600f57600080fd5b506004361060325760003560e01c806360fe47b11460375780636d4ce63c146053575b600080fd5b605160048036036020811015604b57600080fd5b5035606b565b005b60596070565b60408051918252519081900360200190f35b600055565b6000549056fea265627a7a72315820831d131bd3093f2a10a8204d9a34759c16849a8c46b589906551eefd203532e264736f6c634300050b0032";
+        public YahtzeeDeploymentBase() : base(BYTECODE) { }
+        public YahtzeeDeploymentBase(string byteCode) : base(byteCode) { }
 
     }
 

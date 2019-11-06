@@ -10,33 +10,33 @@ using Nethereum.Contracts.CQS;
 using Nethereum.Contracts.ContractHandlers;
 using Nethereum.Contracts;
 using System.Threading;
-using TestNethereum.SimpleStorage.ContractDefinition;
+using YahtzeeContract.Yahtzee.ContractDefinition;
 
-namespace TestNethereum.SimpleStorage
+namespace YahtzeeContract.Yahtzee
 {
-    public partial class SimpleStorageService
+    public partial class YahtzeeService
     {
-        public static Task<TransactionReceipt> DeployContractAndWaitForReceiptAsync(Nethereum.Web3.Web3 web3, SimpleStorageDeployment simpleStorageDeployment, CancellationTokenSource cancellationTokenSource = null)
+        public static Task<TransactionReceipt> DeployContractAndWaitForReceiptAsync(Nethereum.Web3.Web3 web3, YahtzeeDeployment yahtzeeDeployment, CancellationTokenSource cancellationTokenSource = null)
         {
-            return web3.Eth.GetContractDeploymentHandler<SimpleStorageDeployment>().SendRequestAndWaitForReceiptAsync(simpleStorageDeployment, cancellationTokenSource);
+            return web3.Eth.GetContractDeploymentHandler<YahtzeeDeployment>().SendRequestAndWaitForReceiptAsync(yahtzeeDeployment, cancellationTokenSource);
         }
 
-        public static Task<string> DeployContractAsync(Nethereum.Web3.Web3 web3, SimpleStorageDeployment simpleStorageDeployment)
+        public static Task<string> DeployContractAsync(Nethereum.Web3.Web3 web3, YahtzeeDeployment yahtzeeDeployment)
         {
-            return web3.Eth.GetContractDeploymentHandler<SimpleStorageDeployment>().SendRequestAsync(simpleStorageDeployment);
+            return web3.Eth.GetContractDeploymentHandler<YahtzeeDeployment>().SendRequestAsync(yahtzeeDeployment);
         }
 
-        public static async Task<SimpleStorageService> DeployContractAndGetServiceAsync(Nethereum.Web3.Web3 web3, SimpleStorageDeployment simpleStorageDeployment, CancellationTokenSource cancellationTokenSource = null)
+        public static async Task<YahtzeeService> DeployContractAndGetServiceAsync(Nethereum.Web3.Web3 web3, YahtzeeDeployment yahtzeeDeployment, CancellationTokenSource cancellationTokenSource = null)
         {
-            var receipt = await DeployContractAndWaitForReceiptAsync(web3, simpleStorageDeployment, cancellationTokenSource);
-            return new SimpleStorageService(web3, receipt.ContractAddress);
+            var receipt = await DeployContractAndWaitForReceiptAsync(web3, yahtzeeDeployment, cancellationTokenSource);
+            return new YahtzeeService(web3, receipt.ContractAddress);
         }
 
         protected Nethereum.Web3.Web3 Web3{ get; }
 
         public ContractHandler ContractHandler { get; }
 
-        public SimpleStorageService(Nethereum.Web3.Web3 web3, string contractAddress)
+        public YahtzeeService(Nethereum.Web3.Web3 web3, string contractAddress)
         {
             Web3 = web3;
             ContractHandler = web3.Eth.GetContractHandler(contractAddress);
