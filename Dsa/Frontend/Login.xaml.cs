@@ -8,17 +8,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Frontend.Views
+namespace Frontend
 {
     /// <summary>
-    /// Interaction logic for Game.xaml
+    /// Interaction logic for Login.xaml
     /// </summary>
-    public partial class Game : Page
+    public partial class Login : Window
     {
-        public Game()
+        public Login()
         {
             InitializeComponent();
         }

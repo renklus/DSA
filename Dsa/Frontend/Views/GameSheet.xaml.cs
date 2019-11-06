@@ -14,11 +14,11 @@ using System.Windows.Shapes;
 namespace Frontend.Views
 {
     /// <summary>
-    /// Interaction logic for Game.xaml
+    /// Interaction logic for GameSheet.xaml
     /// </summary>
-    public partial class Game : Page
+    public partial class GameSheet : Page
     {
-        public Game()
+        public GameSheet()
         {
             InitializeComponent();
         }
