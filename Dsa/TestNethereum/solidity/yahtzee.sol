@@ -1,4 +1,5 @@
-pragma solidity ^0.5.11;
+//pragma solidity ^0.5.11;
+pragma solidity >=0.4.0 <0.7.0;
 
 contract Yahtzee {
     address payable _owner;
@@ -28,12 +29,12 @@ contract Yahtzee {
         _partnerJoined = true;
     }
 
-    function startGame() public {
-        require(msg.sender == _owner, "Access denied");
-        require(_partnerJoined, "Wait for partner");
+    // function startGame() public {
+    //     require(msg.sender == _owner, "Access denied");
+    //     require(_partnerJoined, "Wait for partner");
 
 
-    }
+    // }
 
 
     function examples() private view  {
