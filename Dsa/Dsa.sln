@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29326.143
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleStartup", "ConsoleStartup\ConsoleStartup.csproj", "{6188F030-7D58-409F-91C8-44231320B78A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example", "ConsoleStartup\Example.csproj", "{6188F030-7D58-409F-91C8-44231320B78A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestNethereum", "TestNethereum\TestNethereum.csproj", "{8330B9B3-AC8C-457C-826C-153E01064EFE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Frontend", "Frontend\Frontend.csproj", "{CD9672A5-4DB4-4F68-ADDF-D1ADAD288DF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frontend", "Frontend\Frontend.csproj", "{CD9672A5-4DB4-4F68-ADDF-D1ADAD288DF7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Settings", "Settings\Settings.csproj", "{7A0C2C0B-E240-41EE-8FFC-BE34A5D4394E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test", "Test\Test.csproj", "{843D5B20-78F0-4241-902D-3DE8A11B99C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YahtzeeContract", "YahtzeeContract\YahtzeeContract.csproj", "{8663B309-B26F-48C9-B548-86CBF65F75E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Settings", "Settings\Settings.csproj", "{7A0C2C0B-E240-41EE-8FFC-BE34A5D4394E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yahtzee", "Yahtzee\Yahtzee.csproj", "{DA0084B6-4ED9-4C09-812C-D602BB9D4AF1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,22 +23,22 @@ Global
 		{6188F030-7D58-409F-91C8-44231320B78A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6188F030-7D58-409F-91C8-44231320B78A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6188F030-7D58-409F-91C8-44231320B78A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8330B9B3-AC8C-457C-826C-153E01064EFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8330B9B3-AC8C-457C-826C-153E01064EFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8330B9B3-AC8C-457C-826C-153E01064EFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8330B9B3-AC8C-457C-826C-153E01064EFE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CD9672A5-4DB4-4F68-ADDF-D1ADAD288DF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CD9672A5-4DB4-4F68-ADDF-D1ADAD288DF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD9672A5-4DB4-4F68-ADDF-D1ADAD288DF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD9672A5-4DB4-4F68-ADDF-D1ADAD288DF7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{843D5B20-78F0-4241-902D-3DE8A11B99C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{843D5B20-78F0-4241-902D-3DE8A11B99C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{843D5B20-78F0-4241-902D-3DE8A11B99C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{843D5B20-78F0-4241-902D-3DE8A11B99C7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7A0C2C0B-E240-41EE-8FFC-BE34A5D4394E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7A0C2C0B-E240-41EE-8FFC-BE34A5D4394E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A0C2C0B-E240-41EE-8FFC-BE34A5D4394E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A0C2C0B-E240-41EE-8FFC-BE34A5D4394E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8663B309-B26F-48C9-B548-86CBF65F75E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8663B309-B26F-48C9-B548-86CBF65F75E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8663B309-B26F-48C9-B548-86CBF65F75E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8663B309-B26F-48C9-B548-86CBF65F75E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA0084B6-4ED9-4C09-812C-D602BB9D4AF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA0084B6-4ED9-4C09-812C-D602BB9D4AF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA0084B6-4ED9-4C09-812C-D602BB9D4AF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA0084B6-4ED9-4C09-812C-D602BB9D4AF1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
