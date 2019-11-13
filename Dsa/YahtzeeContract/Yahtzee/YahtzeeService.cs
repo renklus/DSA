@@ -42,41 +42,94 @@ namespace YahtzeeContract.Yahtzee
             ContractHandler = web3.Eth.GetContractHandler(contractAddress);
         }
 
-        public Task<string> SetRequestAsync(SetFunction setFunction)
+        public Task<bool> PartnerJoinedQueryAsync(PartnerJoinedFunction partnerJoinedFunction, BlockParameter blockParameter = null)
         {
-             return ContractHandler.SendRequestAsync(setFunction);
-        }
-
-        public Task<TransactionReceipt> SetRequestAndWaitForReceiptAsync(SetFunction setFunction, CancellationTokenSource cancellationToken = null)
-        {
-             return ContractHandler.SendRequestAndWaitForReceiptAsync(setFunction, cancellationToken);
-        }
-
-        public Task<string> SetRequestAsync(BigInteger x)
-        {
-            var setFunction = new SetFunction();
-                setFunction.X = x;
-            
-             return ContractHandler.SendRequestAsync(setFunction);
-        }
-
-        public Task<TransactionReceipt> SetRequestAndWaitForReceiptAsync(BigInteger x, CancellationTokenSource cancellationToken = null)
-        {
-            var setFunction = new SetFunction();
-                setFunction.X = x;
-            
-             return ContractHandler.SendRequestAndWaitForReceiptAsync(setFunction, cancellationToken);
-        }
-
-        public Task<BigInteger> GetQueryAsync(GetFunction getFunction, BlockParameter blockParameter = null)
-        {
-            return ContractHandler.QueryAsync<GetFunction, BigInteger>(getFunction, blockParameter);
+            return ContractHandler.QueryAsync<PartnerJoinedFunction, bool>(partnerJoinedFunction, blockParameter);
         }
 
         
-        public Task<BigInteger> GetQueryAsync(BlockParameter blockParameter = null)
+        public Task<bool> PartnerJoinedQueryAsync(BlockParameter blockParameter = null)
         {
-            return ContractHandler.QueryAsync<GetFunction, BigInteger>(null, blockParameter);
+            return ContractHandler.QueryAsync<PartnerJoinedFunction, bool>(null, blockParameter);
+        }
+
+        public Task<string> AbortGameRequestAsync(AbortGameFunction abortGameFunction)
+        {
+             return ContractHandler.SendRequestAsync(abortGameFunction);
+        }
+
+        public Task<string> AbortGameRequestAsync()
+        {
+             return ContractHandler.SendRequestAsync<AbortGameFunction>();
+        }
+
+        public Task<TransactionReceipt> AbortGameRequestAndWaitForReceiptAsync(AbortGameFunction abortGameFunction, CancellationTokenSource cancellationToken = null)
+        {
+             return ContractHandler.SendRequestAndWaitForReceiptAsync(abortGameFunction, cancellationToken);
+        }
+
+        public Task<TransactionReceipt> AbortGameRequestAndWaitForReceiptAsync(CancellationTokenSource cancellationToken = null)
+        {
+             return ContractHandler.SendRequestAndWaitForReceiptAsync<AbortGameFunction>(null, cancellationToken);
+        }
+
+        public Task<BigInteger> StakeQueryAsync(StakeFunction stakeFunction, BlockParameter blockParameter = null)
+        {
+            return ContractHandler.QueryAsync<StakeFunction, BigInteger>(stakeFunction, blockParameter);
+        }
+
+        
+        public Task<BigInteger> StakeQueryAsync(BlockParameter blockParameter = null)
+        {
+            return ContractHandler.QueryAsync<StakeFunction, BigInteger>(null, blockParameter);
+        }
+
+        public Task<string> OwnerQueryAsync(OwnerFunction ownerFunction, BlockParameter blockParameter = null)
+        {
+            return ContractHandler.QueryAsync<OwnerFunction, string>(ownerFunction, blockParameter);
+        }
+
+        
+        public Task<string> OwnerQueryAsync(BlockParameter blockParameter = null)
+        {
+            return ContractHandler.QueryAsync<OwnerFunction, string>(null, blockParameter);
+        }
+
+        public Task<string> PartnerQueryAsync(PartnerFunction partnerFunction, BlockParameter blockParameter = null)
+        {
+            return ContractHandler.QueryAsync<PartnerFunction, string>(partnerFunction, blockParameter);
+        }
+
+        
+        public Task<string> PartnerQueryAsync(BlockParameter blockParameter = null)
+        {
+            return ContractHandler.QueryAsync<PartnerFunction, string>(null, blockParameter);
+        }
+
+        public Task<string> JoinGameRequestAsync(JoinGameFunction joinGameFunction)
+        {
+             return ContractHandler.SendRequestAsync(joinGameFunction);
+        }
+
+        public Task<TransactionReceipt> JoinGameRequestAndWaitForReceiptAsync(JoinGameFunction joinGameFunction, CancellationTokenSource cancellationToken = null)
+        {
+             return ContractHandler.SendRequestAndWaitForReceiptAsync(joinGameFunction, cancellationToken);
+        }
+
+        public Task<string> JoinGameRequestAsync(BigInteger stake)
+        {
+            var joinGameFunction = new JoinGameFunction();
+                joinGameFunction.Stake = stake;
+            
+             return ContractHandler.SendRequestAsync(joinGameFunction);
+        }
+
+        public Task<TransactionReceipt> JoinGameRequestAndWaitForReceiptAsync(BigInteger stake, CancellationTokenSource cancellationToken = null)
+        {
+            var joinGameFunction = new JoinGameFunction();
+                joinGameFunction.Stake = stake;
+            
+             return ContractHandler.SendRequestAndWaitForReceiptAsync(joinGameFunction, cancellationToken);
         }
     }
 }
