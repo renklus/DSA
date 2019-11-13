@@ -5,5 +5,18 @@
         <Setter Property="Width" Value="200"/>
         <Setter Property="Height" Value="50"/>
     </Style>
+
+    <Style x:Key="Label" TargetType="Label">
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Height" Value="19"/>
+        <Setter Property="Width" Value="200"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Key="TextBox" TargetType="TextBox">
+        <Setter Property="Width" Value="100"/>
+        <Setter Property="Height" Value="19"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+    </Style>
     
 </ResourceDictionary>

@@ -7,14 +7,53 @@
       mc:Ignorable="d" 
       d:DesignHeight="400" d:DesignWidth="300"
       Title="GameSheet">
-    
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="300"></ColumnDefinition>
-            <ColumnDefinition Width="100"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-        </Grid.RowDefinitions>
-    </Grid>
+
+    <Page.Resources>
+        <ResourceDictionary Source="/Styles/Styles.xaml"/>
+    </Page.Resources>
+
+    <WrapPanel Orientation="Vertical">
+        <Label Style="{StaticResource Label}">Upper Section:</Label>
+        <Label Style="{StaticResource Label}">Count and add ones</Label>
+        <Label Style="{StaticResource Label}">Count and add twos</Label>
+        <Label Style="{StaticResource Label}">Count and add threes</Label>
+        <Label Style="{StaticResource Label}">Count and add fours</Label>
+        <Label Style="{StaticResource Label}">Count and add fives</Label>
+        <Label Style="{StaticResource Label}">Count and add sixes</Label>
+        <Label Style="{StaticResource Label}">Total</Label>
+        <Label Style="{StaticResource Label}">Upper Section Bonus</Label>
+        <Label Style="{StaticResource Label}">Upper Section Total</Label>
+        <Label Style="{StaticResource Label}">Lower Section</Label>
+        <Label Style="{StaticResource Label}">3 of a kind</Label>
+        <Label Style="{StaticResource Label}">4 of a kind</Label>
+        <Label Style="{StaticResource Label}">Full House</Label>
+        <Label Style="{StaticResource Label}">Low Straight</Label>
+        <Label Style="{StaticResource Label}">High Straight</Label>
+        <Label Style="{StaticResource Label}">Yahtzee</Label>
+        <Label Style="{StaticResource Label}">Chance</Label>
+        <Label Style="{StaticResource Label}">Bonus</Label>
+        <Label Style="{StaticResource Label}">Lower section total</Label>
+        <Label Style="{StaticResource Label}">Total</Label>
+        <TextBox Style="{StaticResource TextBox}"/>
+        <TextBox Style="{StaticResource TextBox}"/>
+        <TextBox Style="{StaticResource TextBox}"/>
+        <TextBox Style="{StaticResource TextBox}"/>
+        <TextBox Style="{StaticResource TextBox}"/>
+        <TextBox Style="{StaticResource TextBox}"/>
+        <TextBox Style="{StaticResource TextBox}"/>
+        <TextBox Style="{StaticResource TextBox}"/>
+        <TextBox Style="{StaticResource TextBox}"/>
+        <TextBox Style="{StaticResource TextBox}"/>
+        <TextBox Style="{StaticResource TextBox}"/>
+        <TextBox Style="{StaticResource TextBox}"/>
+        <TextBox Style="{StaticResource TextBox}"/>
+        <TextBox Style="{StaticResource TextBox}"/>
+        <TextBox Style="{StaticResource TextBox}"/>
+        <TextBox Style="{StaticResource TextBox}"/>
+        <TextBox Style="{StaticResource TextBox}"/>
+        <TextBox Style="{StaticResource TextBox}"/>
+        <TextBox Style="{StaticResource TextBox}"/>
+        <TextBox Style="{StaticResource TextBox}"/>
+        <TextBox Style="{StaticResource TextBox}"/>
+    </WrapPanel>
 </Page>
