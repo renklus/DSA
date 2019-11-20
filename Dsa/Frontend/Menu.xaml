@@ -13,16 +13,16 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="300"/>
-            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="350"/>
+            <ColumnDefinition Width="450"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="400"/>
         </Grid.RowDefinitions>
 
-        <Frame x:Name="ChatFrame" Grid.Column="0" Grid.Row="0"/>
+        <Frame x:Name="ChatFrame" Source="Views/Chat.xaml" Grid.Column="0" Grid.Row="0" Margin="20" Height="380" Width="310"/>
 
-        <Frame x:Name="GameFrame" Source="/Views/Queue.xaml" Grid.Column="1" Grid.Row="0" Width="450" Height="400"/>
+        <Frame x:Name="GameFrame" Source="/Views/Queue.xaml" Grid.Column="1" Grid.Row="0" Margin="20" Height="380" Width="410"/>
 
     </Grid>
 
