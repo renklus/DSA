@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Yahtzee
 {
-    class Score
+    public class Score
     {
         public User Owner { get; set; }
 
@@ -24,16 +24,14 @@ namespace Yahtzee
 
         public int FourOfAKind { get; set; }
 
-        public int FullHouse { get; set; }
+        public bool FullHouse { get; set; }
 
-        public int LowStraight { get; set; }
+        public bool LowStraight { get; set; }
 
-        public int HighStraight { get; set; }
+        public bool HighStraight { get; set; }
 
         public bool Yahtzee { get; set; }
 
         public int Chance { get; set; }
-
-        public bool Bonus { get; set; }
     }
 }

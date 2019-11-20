@@ -5,12 +5,12 @@ using System.Text;
 
 namespace Yahtzee
 {
-    class User
+    public class User
     {
         public string Name { get; set; }
 
         public string Wallet { get; set; }
 
-        private SecureString PrivateKey { get; set; }
+        public SecureString PrivateKey { get; set; }
     }
 }

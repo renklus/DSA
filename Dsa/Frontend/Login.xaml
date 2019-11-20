@@ -16,6 +16,8 @@
         <TextBox x:Name="UserName" Width="200" Height="25"></TextBox>
         <Label HorizontalAlignment="Center" FontSize="18">Wallet Address:</Label>
         <TextBox x:Name="Wallet" Width="200" Height="25"></TextBox>
+        <Label HorizontalAlignment="Center" FontSize="18">Private Key:</Label>
+        <TextBox x:Name="PK" Width="200" Height="25"></TextBox>
         <Button Style="{StaticResource Button}" VerticalAlignment="Top" Margin="20" Content="Login"/>
     </StackPanel>
 </Window>
