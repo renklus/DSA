@@ -12,8 +12,9 @@
 //     }
 // }
 pragma solidity ^0.5.11;
+import "./nreAPI.sol";
 
-contract Yahtzee {
+contract Yahtzee  is usingNRE{
     address payable public  _owner;
     address public _partner;
     bool public _partnerJoined = false;
@@ -31,6 +32,7 @@ contract Yahtzee {
     uint8 public _ownerThrows = 0;
     uint8 public _partnerThrows = 0;
     uint8 public _round = 1;
+    uint8 private randomnessCounter = 0;
     mapping(uint8 => bool) public _ownerUsedScoring;
     mapping(uint8 => bool) public _partnerUsedScoring;
     mapping(uint8 => ScoringOption) public ScoringOptionIndex;
@@ -125,7 +127,7 @@ contract Yahtzee {
                 _ownerDice4 = getRandomDice();
             if(throwDice5)
                 _ownerDice5 = getRandomDice();
-                
+
             _ownerThrows++;
         }
         else if(msg.sender == _partner)
@@ -149,8 +151,8 @@ contract Yahtzee {
         else
             require(false, "Access denied");
     }
-    
-    function assignResult(ScoringOption scoringChoice) public {
+
+    function assignResult(ScoringOption scoringChoice) public view{
         if(msg.sender == _owner)
         {
 
@@ -172,9 +174,120 @@ contract Yahtzee {
             }
     }
 
-    function getRandomDice() private pure /*remove pure*/ returns (uint8) {
-        return 1;
+    function getRandomDice() private returns (uint8) {
+        uint8 result;
+        if (randomnessCounter == 0) {
+
+            result = uint8((ra() % 6) + 1);
+
+        }else if (randomnessCounter == 1) {
+
+            result = uint8((rb() % 6) + 1);
+
+        }else if (randomnessCounter == 2) {
+
+            result = uint8((rc() % 6) + 1);
+
+        }else if (randomnessCounter == 3) {
+
+            result = uint8((rd() % 6) + 1);
+
+        }else if (randomnessCounter == 4) {
+
+            result = uint8((re() % 6) + 1);
+
+        }else if (randomnessCounter == 5) {
+
+            result = uint8((rf() % 6) + 1);
+
+        }else if (randomnessCounter == 6) {
+
+            result = uint8((rg() % 6) + 1);
+
+        }else if (randomnessCounter == 7) {
+
+            result = uint8((rh() % 6) + 1);
+
+        }else if (randomnessCounter == 8) {
+
+            result = uint8((ri() % 6) + 1);
+
+        }else if (randomnessCounter == 9) {
+
+            result = uint8((rj() % 6) + 1);
+
+        }else if (randomnessCounter == 10) {
+
+            result = uint8((rk() % 6) + 1);
+
+        }else if (randomnessCounter == 11) {
+
+            result = uint8((rl() % 6) + 1);
+
+        }else if (randomnessCounter == 12) {
+
+            result = uint8((rm() % 6) + 1);
+
+        }else if (randomnessCounter == 13) {
+
+            result = uint8((rn() % 6) + 1);
+
+        }else if (randomnessCounter == 14) {
+
+            result = uint8((ro() % 6) + 1);
+
+        }else if (randomnessCounter == 15) {
+
+            result = uint8((rp() % 6) + 1);
+
+        }else if (randomnessCounter == 16) {
+
+            result = uint8((rq() % 6) + 1);
+
+        }else if (randomnessCounter == 17) {
+
+            result = uint8((rr() % 6) + 1);
+
+        }else if (randomnessCounter == 18) {
+
+            result = uint8((rs() % 6) + 1);
+
+        }else if (randomnessCounter == 19) {
+
+            result = uint8((rt() % 6) + 1);
+
+        }else if (randomnessCounter == 20) {
+
+            result = uint8((ru() % 6) + 1);
+
+        }else if (randomnessCounter == 21) {
+
+            result = uint8((rv() % 6) + 1);
+
+        }else if (randomnessCounter == 22) {
+
+            result = uint8((rw() % 6) + 1);
+
+        }else if (randomnessCounter == 23) {
+
+            result = uint8((rx() % 6) + 1);
+
+        }
+
+        randomnessCounter = (randomnessCounter + 1) % 24;
+        return result;
     }
+
+    //function rollDice() public view returns(uint8[5] memory) {
+	//	uint8[5] memory dice;
+	//	dice[0] = uint8((ra() % 6) + 1);
+	//	dice[1] = uint8((rb() % 6) + 1);
+	//	dice[2] = uint8((rc() % 6) + 1);
+	//	dice[3] = uint8((rd() % 6) + 1);
+	//	dice[4] = uint8((rd() % 6) + 1);
+
+	//	return dice;
+	//}
 
 
     // function examples() private view  {
