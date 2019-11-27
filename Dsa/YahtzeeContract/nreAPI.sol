@@ -30,7 +30,7 @@ pragma solidity >= 0.4.0; // Compiler version incompatible error!
 
 contract niguezRandomityEngine {
 
-  function ra() external view returns (uint256);
+    function ra() external view returns (uint256);
 	function rb() external view returns (uint256);
 	function rc() external view returns (uint256);
 	function rd() external view returns (uint256);
@@ -58,9 +58,9 @@ contract niguezRandomityEngine {
 
 contract usingNRE {
 
-  niguezRandomityEngine internal nre = niguezRandomityEngine(0x031eaE8a8105217ab64359D4361022d0947f4572);
+    niguezRandomityEngine internal nre = niguezRandomityEngine(0x031eaE8a8105217ab64359D4361022d0947f4572);
 
-  function ra() internal view returns (uint256) {
+    function ra() internal view returns (uint256) {
         return nre.ra();
     }
 

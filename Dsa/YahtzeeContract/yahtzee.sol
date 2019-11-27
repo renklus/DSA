@@ -167,11 +167,11 @@ contract Yahtzee  is usingNRE{
 
     function getScoringIndex(ScoringOption scoringOption) private view returns (uint8)  {
 
-            for(uint8 i = 0; i < 12; i++)
-            {
-                if(scoringOption == ScoringOptionIndex[i])
-                    return i;
-            }
+        for(uint8 i = 0; i < 12; i++)
+        {
+            if(scoringOption == ScoringOptionIndex[i])
+                return i;
+        }
     }
 
     function getRandomDice() private returns (uint8) {
