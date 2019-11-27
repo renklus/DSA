@@ -15,25 +15,25 @@
     <WrapPanel Orientation="Horizontal">
         <Label Style="{StaticResource Label}">Upper Section:</Label>
         <Label Style="{StaticResource Label}">Count and add ones</Label>
-        <TextBox Style="{StaticResource TextBox}"/>
+        <TextBox Style="{StaticResource TextBox}" Text="{Binding Ones}"/>
         <Label Style="{StaticResource Label}">Count and add twos</Label>
-        <TextBox Style="{StaticResource TextBox}"/>
+        <TextBox Style="{StaticResource TextBox}" Text="{Binding Twos}"/>
         <Label Style="{StaticResource Label}">Count and add threes</Label>
-        <TextBox Style="{StaticResource TextBox}"/>
+        <TextBox Style="{StaticResource TextBox}" Text="{Binding Threes}"/>
         <Label Style="{StaticResource Label}">Count and add fours</Label>
-        <TextBox Style="{StaticResource TextBox}"/>
+        <TextBox Style="{StaticResource TextBox}" Text="{Binding Fours}"/>
         <Label Style="{StaticResource Label}">Count and add fives</Label>
-        <TextBox Style="{StaticResource TextBox}"/>
+        <TextBox Style="{StaticResource TextBox}" Text="{Binding Fives}"/>
         <Label Style="{StaticResource Label}">Count and add sixes</Label>
-        <TextBox Style="{StaticResource TextBox}"/>
+        <TextBox Style="{StaticResource TextBox}" Text="{Binding Sixes}"/>
         <Label Style="{StaticResource Label}">Total</Label>
         <Label Style="{StaticResource Label}">Upper Section Bonus</Label>
         <Label Style="{StaticResource Label}">Upper Section Total</Label>
         <Label Style="{StaticResource Label}">Lower Section</Label>
         <Label Style="{StaticResource Label}">3 of a kind</Label>
-        <TextBox Style="{StaticResource TextBox}"/>
+        <TextBox Style="{StaticResource TextBox}" Text="{Binding ThreeOfAKind}"/>
         <Label Style="{StaticResource Label}">4 of a kind</Label>
-        <TextBox Style="{StaticResource TextBox}"/>
+        <TextBox Style="{StaticResource TextBox}" Text="{Binding FourOfAKind}"/>
         <Label Style="{StaticResource Label}">Full House</Label>
         <CheckBox Margin="42, 0"/>
         <Label Style="{StaticResource Label}">Low Straight</Label>
@@ -43,7 +43,7 @@
         <Label Style="{StaticResource Label}">Yahtzee</Label>
         <CheckBox Margin="42, 0"/>
         <Label Style="{StaticResource Label}">Chance</Label>
-        <TextBox Style="{StaticResource TextBox}"/>
+        <TextBox Style="{StaticResource TextBox}" Text="{Binding Chance}"/>
         <Label Style="{StaticResource Label}">Lower section total</Label>
         <Label Style="{StaticResource Label}">Total</Label>
     </WrapPanel>

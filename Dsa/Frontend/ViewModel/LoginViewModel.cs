@@ -9,7 +9,7 @@ namespace Frontend.ViewModel
 {
     public class LoginViewModel : BindableBase
     {
-        public RelayCommand SaveCommand { get; set; }
+        public RelayCommand UserLogin { get; set; }
 
         public User User { get; set; }
 
@@ -38,7 +38,7 @@ namespace Frontend.ViewModel
 
         public LoginViewModel(User user)
         {
-            SaveCommand = new RelayCommand(Save);
+            UserLogin = new RelayCommand(Save);
         }
 
         public void Save()

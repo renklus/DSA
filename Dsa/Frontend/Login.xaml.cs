@@ -9,6 +9,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Frontend.ViewModel;
+using Yahtzee;
 
 namespace Frontend
 {
@@ -20,6 +22,12 @@ namespace Frontend
         public Login()
         {
             InitializeComponent();
+
+            User user = new User();
+            var vm = new LoginViewModel(user);
+            DataContext = vm;
         }
+
+        private void UserLogin(object sender, RoutedEventArgs e) { }
     }
 }

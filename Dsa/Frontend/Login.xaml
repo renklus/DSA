@@ -13,11 +13,11 @@
 
     <StackPanel VerticalAlignment="Center">
         <Label HorizontalAlignment="Center" FontSize="18">User Name:</Label>
-        <TextBox x:Name="UserName" Width="200" Height="25"></TextBox>
+        <TextBox x:Name="UserName" Width="200" Height="25" Text="{Binding Name}"/>
         <Label HorizontalAlignment="Center" FontSize="18">Wallet Address:</Label>
-        <TextBox x:Name="Wallet" Width="200" Height="25"></TextBox>
+        <TextBox x:Name="Wallet" Width="200" Height="25" Text="{Binding Wallet}"/>
         <Label HorizontalAlignment="Center" FontSize="18">Private Key:</Label>
-        <TextBox x:Name="PK" Width="200" Height="25"></TextBox>
-        <Button Style="{StaticResource Button}" VerticalAlignment="Top" Margin="20" Content="Login"/>
+        <TextBox x:Name="Pk" Width="200" Height="25" Text="{Binding PrivateKey}"/>
+        <Button Click="UserLogin" Style="{StaticResource Button}" VerticalAlignment="Top" Margin="20" Content="Login" Command="{Binding SaveCommand}"/>
     </StackPanel>
 </Window>

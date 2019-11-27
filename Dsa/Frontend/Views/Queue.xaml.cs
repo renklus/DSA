@@ -18,12 +18,13 @@ namespace Frontend.Views
     /// <summary>
     /// Interaction logic for Page1.xaml
     /// </summary>
-    public partial class Page1 : Page
+    public partial class Queue : Page
     {
-        public Page1()
+        public Queue()
         {
             InitializeComponent();
         }
+
 
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
