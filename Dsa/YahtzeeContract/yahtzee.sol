@@ -159,6 +159,19 @@ contract Yahtzee  is usingNRE{
             require(false, "Access denied");
     }
 
+    function getCurrentDices() public view returns (uint8, uint8, uint8, uint8, uint8) {
+        if(msg.sender == _owner)
+        {
+            return (_ownerDice1, _ownerDice2, _ownerDice3, _ownerDice4, _ownerDice5);
+        }
+        else if(msg.sender == _partner)
+        {
+            return (_partnerDice1, _partnerDice2, _partnerDice3, _partnerDice4, _partnerDice5);
+        }
+        else
+            require(false, "Access denied");
+    }
+
     function assignResult(ScoringOption scoringChoice,
                     bool scoringHelpDice1, bool scoringHelpDice2, bool scoringHelpDice3, bool scoringHelpDice4, bool scoringHelpDice5)
                     public {
