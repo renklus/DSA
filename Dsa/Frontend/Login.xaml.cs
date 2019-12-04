@@ -24,10 +24,12 @@ namespace Frontend
             InitializeComponent();
 
             User user = new User();
-            var vm = new LoginViewModel(user);
-            DataContext = vm;
+            DataContext = new LoginViewModel(user);
         }
 
-        private void UserLogin(object sender, RoutedEventArgs e) { }
+        private void UserLogin(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

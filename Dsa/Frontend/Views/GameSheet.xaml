@@ -35,13 +35,13 @@
         <Label Style="{StaticResource Label}">4 of a kind</Label>
         <TextBox Style="{StaticResource TextBox}" Text="{Binding FourOfAKind}"/>
         <Label Style="{StaticResource Label}">Full House</Label>
-        <CheckBox Margin="42, 0"/>
+        <CheckBox IsChecked="{Binding Path=FullHouse}" Margin="42, 0"/>
         <Label Style="{StaticResource Label}">Low Straight</Label>
-        <CheckBox Margin="42, 0"/>
+        <CheckBox IsChecked="{Binding Path=LowStraight}" Margin="42, 0"/>
         <Label Style="{StaticResource Label}">High Straight</Label>
-        <CheckBox Margin="42, 0"/>
+        <CheckBox IsChecked="{Binding Path=HighStraight}" Margin="42, 0"/>
         <Label Style="{StaticResource Label}">Yahtzee</Label>
-        <CheckBox Margin="42, 0"/>
+        <CheckBox IsChecked="{Binding Path=Yahtzee}" Margin="42, 0"/>
         <Label Style="{StaticResource Label}">Chance</Label>
         <TextBox Style="{StaticResource TextBox}" Text="{Binding Chance}"/>
         <Label Style="{StaticResource Label}">Lower section total</Label>

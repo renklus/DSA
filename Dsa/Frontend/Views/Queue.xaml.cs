@@ -16,7 +16,7 @@ using Yahtzee;
 namespace Frontend.Views
 {
     /// <summary>
-    /// Interaction logic for Page1.xaml
+    /// Interaction logic for Queue.xaml
     /// </summary>
     public partial class Queue : Page
     {

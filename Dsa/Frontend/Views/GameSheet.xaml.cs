@@ -25,9 +25,8 @@ namespace Frontend.Views
             InitializeComponent();
             
             Score score = new Score();
-            var vm = new GameSheetViewModel(score);
-
-            DataContext = vm;
+            DataContext = new GameSheetViewModel(score);
         }
+
     }
 }
