@@ -16,7 +16,5 @@ namespace Yahtzee
 
         public int Round { get; set; }
 
-        private int[] Dices = 
-
     }
 }
