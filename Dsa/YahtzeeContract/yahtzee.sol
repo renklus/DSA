@@ -1,16 +1,3 @@
-// pragma solidity >=0.4.0 <0.7.0;
-
-// contract Yahtzee {
-//     uint storedData;
-
-//     function set(uint x) public {
-//         storedData = x;
-//     }
-
-//     function get() public view returns (uint) {
-//         return storedData;
-//     }
-// }
 pragma solidity ^0.5.11;
 import "./nreAPI.sol";
 
@@ -38,6 +25,8 @@ contract Yahtzee  is usingNRE{
     mapping(uint8 => ScoringOption) public ScoringOptionIndex;
     uint16 _ownerScore = 0;
     uint16 _partnerScore = 0;
+    uint256 _ownerLastSeen = 0;
+    uint256 _partnerLastSeen = 0;
 
 
     enum ScoringOption {
@@ -58,8 +47,13 @@ contract Yahtzee  is usingNRE{
 
     constructor (address payable partner, uint stake) public payable {
         require(msg.value >= stake, "Not enough stake provided");
+
         _owner = msg.sender;
         _partner = partner;
+
+        _ownerLastSeen = block.number;
+        _partnerLastSeen = block.number;
+
         ScoringOptionIndex[0] = ScoringOption.One;
         ScoringOptionIndex[1] = ScoringOption.Two;
         ScoringOptionIndex[2] = ScoringOption.Three;
@@ -93,6 +87,9 @@ contract Yahtzee  is usingNRE{
         if(msg.sender == _owner)
         {
             require(_ownerThrows == 0, "Already rolled once");
+
+            _ownerLastSeen = block.number;
+
             _ownerDice1 = getRandomDice();
             _ownerDice2 = getRandomDice();
             _ownerDice3 = getRandomDice();
@@ -103,6 +100,9 @@ contract Yahtzee  is usingNRE{
         else if(msg.sender == _partner)
         {
             require(_partnerThrows == 0, "Already rolled once");
+
+            _partnerLastSeen = block.number;
+
             _partnerDice1 = getRandomDice();
             _partnerDice2 = getRandomDice();
             _partnerDice3 = getRandomDice();
@@ -119,6 +119,8 @@ contract Yahtzee  is usingNRE{
         {
             require(_ownerThrows >= 0, "Already rolled once");
             require(_ownerThrows < 3, "No more rolls available");
+
+            _ownerLastSeen = block.number;
 
             if(throwDice1)
                 _ownerDice1 = getRandomDice();
@@ -137,6 +139,8 @@ contract Yahtzee  is usingNRE{
         {
             require(_partnerThrows >= 0, "Already rolled once");
             require(_partnerThrows < 3, "No more rolls available");
+
+            _partnerLastSeen = block.number;
 
             if(throwDice1)
                 _partnerDice1 = getRandomDice();
@@ -162,15 +166,26 @@ contract Yahtzee  is usingNRE{
         if(msg.sender == _owner)
         {
             require(!_ownerUsedScoring[scoringIndex], "Scoring was already used");
+
+            _ownerLastSeen = block.number;
+
             _ownerUsedScoring[scoringIndex] = true;
-            _ownerScore = getPoints(
+            _ownerScore += getPoints(
                 _ownerDice1, _ownerDice2, _ownerDice3, _ownerDice4, _ownerDice5,
                 scoringChoice,
                 scoringHelpDice1, scoringHelpDice2, scoringHelpDice3, scoringHelpDice4, scoringHelpDice5);
         }
         else if(msg.sender == _partner)
         {
+            require(!_partnerUsedScoring[scoringIndex], "Scoring was already used");
 
+            _partnerLastSeen = block.number;
+
+            _partnerUsedScoring[scoringIndex] = true;
+            _partnerScore += getPoints(
+                _partnerDice1, _partnerDice2, _partnerDice3, _partnerDice4, _partnerDice5,
+                scoringChoice,
+                scoringHelpDice1, scoringHelpDice2, scoringHelpDice3, scoringHelpDice4, scoringHelpDice5);
         }
         else
             require(false, "Access denied");
@@ -226,7 +241,6 @@ contract Yahtzee  is usingNRE{
                 if(value == dice5)
                     dices++;
             }
-            //require(dices >= 3, "Three of a kind must consist of at least 3 identical values");
             if(dices >= 3) {
                 return dice1 + dice2 + dice3 + dice4 + dice5;
             }
@@ -263,7 +277,6 @@ contract Yahtzee  is usingNRE{
             if(value == dice5)
                 dices++;
         }
-        //require(dices >= 4, "Four of a kind must consist of at least 4 identical values");
         if(dices >= 4)
             return dice1 + dice2 + dice3 + dice4 + dice5;
         return 0;
@@ -282,7 +295,6 @@ contract Yahtzee  is usingNRE{
                 mainDices++;
             }
             else if(mainValue == dice1) {
-                //require(mainValue == dice1, "Invalid value for dice 1");
                 mainDices++;
             }
             else
@@ -294,7 +306,6 @@ contract Yahtzee  is usingNRE{
                 otherDices++;
             }
             else if(otherValue == dice1) {
-                // require(otherValue == dice1, "Invalid value for dice 1");
                 otherDices++;
             }
             else
@@ -306,7 +317,6 @@ contract Yahtzee  is usingNRE{
                 mainDices++;
             }
             else if(mainValue == dice2) {
-                // require(mainValue == dice2, "Invalid value for dice 2");
                 mainDices++;
             }
             else
@@ -318,7 +328,6 @@ contract Yahtzee  is usingNRE{
                 otherDices++;
             }
             else if(otherValue == dice2) {
-                // require(otherValue == dice2, "Invalid value for dice 2");
                 otherDices++;
             }
             else
@@ -330,7 +339,6 @@ contract Yahtzee  is usingNRE{
                 mainDices++;
             }
             else if(mainValue == dice3){
-                // require(mainValue == dice3, "Invalid value for dice 3");
                 mainDices++;
             }
             else
@@ -342,7 +350,6 @@ contract Yahtzee  is usingNRE{
                 otherDices++;
             }
             else if(otherValue == dice3) {
-                // require(otherValue == dice3, "Invalid value for dice 3");
                 otherDices++;
             }
             else
@@ -354,7 +361,6 @@ contract Yahtzee  is usingNRE{
                 mainDices++;
             }
             else if(mainValue == dice4) {
-                // require(mainValue == dice4, "Invalid value for dice 4");
                 mainDices++;
             }
             else
@@ -366,7 +372,6 @@ contract Yahtzee  is usingNRE{
                 otherDices++;
             }
             else if(otherValue == dice4) {
-                // require(otherValue == dice4, "Invalid value for dice 4");
                 otherDices++;
             }
             else
@@ -378,7 +383,6 @@ contract Yahtzee  is usingNRE{
                 mainDices++;
             }
             else if(mainValue == dice5){
-                // require(mainValue == dice5, "Invalid value for dice 5");
                 mainDices++;
             }
             else
@@ -390,12 +394,10 @@ contract Yahtzee  is usingNRE{
                 otherDices++;
             }
             else if(otherValue == dice5) {
-                // require(otherValue == dice5, "Invalid value for dice 5");
                 otherDices++;
             }
             return 0;
         }
-        // require(mainDices == 3 && otherDices == 2, "Invalid Full House");
         return 25;
     }
     function getPoints9(uint8 dice1, uint8 dice2, uint8 dice3, uint8 dice4, uint8 dice5) private pure returns (uint8) {
