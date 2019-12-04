@@ -14,26 +14,66 @@ namespace Yahtzee
         private string _privateKey = Settings.Settings.PrivateKey;
         private YahtzeeService _service;
         private byte _diceThrows = 0;
+        private Web3 _web3;
+        private bool _isGameStartedOrJoined = false;
 
         public YahtzeeManager()
         {
 
         }
 
-        public async Task DeployContract()
+        private void ConfigureBlockchain()
         {
             Account account = new Account(_privateKey);
-            Web3 web3 = new Web3(account, _url);
+            _web3 = new Web3(account, _url);
+
+        }
+
+        private async Task<string> DeployContract(string partnerAddress)
+        {
+            ConfigureBlockchain();
 
             var deployment = new YahtzeeDeployment()
             {
-                Partner = "0x08c31473a219f22922f47f001611d8bac62fbb6d",
+                Partner = partnerAddress,
                 Stake = 20,
                 AmountToSend = 20
             };
-            var receipt = await YahtzeeService.DeployContractAndWaitForReceiptAsync(web3, deployment);
-            _service = new YahtzeeService(web3, receipt.ContractAddress);
+            var receipt = await YahtzeeService.DeployContractAndWaitForReceiptAsync(_web3, deployment);
+            _service = new YahtzeeService(_web3, receipt.ContractAddress);
 
+            return receipt.ContractAddress;
+        }
+
+        /// <summary>
+        /// Startet ein Spiel mit dem aktuell angemeldeten Spieler und dem angegebenen Partner
+        /// </summary>
+        /// <returns>Gibt die ID des Games zurück</returns>
+        /// <param name="partnerAddress"></param>
+        /// <returns></returns>
+        public async Task<string> StartGame(string partnerAddress)
+        {
+            if (_isGameStartedOrJoined)
+                throw new Exception("Game already started or joined.");
+            _isGameStartedOrJoined = true;
+
+            //Todo: Remove if
+            if (string.IsNullOrWhiteSpace(partnerAddress))
+                partnerAddress = "0x08c31473a219f22922f47f001611d8bac62fbb6d";
+
+            return await DeployContract(partnerAddress);
+        }
+
+        public async Task JoinGame(string gameId)
+        {
+            if (_isGameStartedOrJoined)
+                throw new Exception("Game already started or joined.");
+            _isGameStartedOrJoined = true;
+
+            ConfigureBlockchain();
+            _service = new YahtzeeService(_web3, gameId);
+            
+            await _service.JoinGameRequestAndWaitForReceiptAsync();
         }
 
         /// <summary>
