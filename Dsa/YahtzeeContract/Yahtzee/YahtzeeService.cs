@@ -167,6 +167,16 @@ namespace YahtzeeContract.Yahtzee
             return ContractHandler.QueryAsync<PartnerDice1Function, byte>(null, blockParameter);
         }
 
+        public Task<GetCurrentDicesOutputDTO> GetCurrentDicesQueryAsync(GetCurrentDicesFunction getCurrentDicesFunction, BlockParameter blockParameter = null)
+        {
+            return ContractHandler.QueryDeserializingToObjectAsync<GetCurrentDicesFunction, GetCurrentDicesOutputDTO>(getCurrentDicesFunction, blockParameter);
+        }
+
+        public Task<GetCurrentDicesOutputDTO> GetCurrentDicesQueryAsync(BlockParameter blockParameter = null)
+        {
+            return ContractHandler.QueryDeserializingToObjectAsync<GetCurrentDicesFunction, GetCurrentDicesOutputDTO>(null, blockParameter);
+        }
+
         public Task<string> AbortGameRequestAsync(AbortGameFunction abortGameFunction)
         {
              return ContractHandler.SendRequestAsync(abortGameFunction);
