@@ -14,6 +14,12 @@ namespace Frontend.ViewModel
 
         public Score Score { get; set; }
 
+        public GameSheetViewModel(Score score)
+        {
+            Load(score);
+            SaveCommand = new RelayCommand(Save);
+        }
+
         private int _ones;
         public int Ones
         {
@@ -107,11 +113,6 @@ namespace Frontend.ViewModel
 
         public Action<Score> OnSave { get; set; }
 
-        public GameSheetViewModel(Score score)
-        {
-            Load(score);
-            SaveCommand = new RelayCommand(Save);
-        }
 
         public void Load(Score score)
         {

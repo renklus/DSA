@@ -15,19 +15,19 @@
     <StackPanel Orientation="Horizontal">
         <WrapPanel Orientation="Horizontal" Width="400">
             <Label Style="{StaticResource GameLabel}">Dice Roll 1</Label>
-            <TextBlock Width="200" Text="{Binding }"></TextBlock>
+            <TextBlock Width="200" Text="{Binding DiceOne}"></TextBlock>
             <CheckBox Margin="80, 0"/>
             <Label Style="{StaticResource GameLabel}">Dice Roll 2</Label>
-            <TextBlock Width="200" Text="{Binding }"></TextBlock>
+            <TextBlock Width="200" Text="{Binding DiceTwo}"></TextBlock>
             <CheckBox Margin="80, 0"/>
-            <Label Style="{StaticResource GameLabel}">Dice Roll 2</Label>
-            <TextBlock Width="200" Text="{Binding }"></TextBlock>
+            <Label Style="{StaticResource GameLabel}">Dice Roll 3</Label>
+            <TextBlock Width="200" Text="{Binding DiceThree}"></TextBlock>
             <CheckBox Margin="80, 0"/>
-            <Label Style="{StaticResource GameLabel}">Dice Roll 2</Label>
-            <TextBlock Width="200" Text="{Binding }"></TextBlock>
+            <Label Style="{StaticResource GameLabel}">Dice Roll 4</Label>
+            <TextBlock Width="200" Text="{Binding DiceFour}"></TextBlock>
             <CheckBox Margin="80, 0"/>
-            <Label Style="{StaticResource GameLabel}">Dice Roll 2</Label>
-            <TextBlock Width="200" Text="{Binding }"></TextBlock>
+            <Label Style="{StaticResource GameLabel}">Dice Roll 5</Label>
+            <TextBlock Width="200" Text="{Binding DiceFive}"></TextBlock>
             <CheckBox Margin="80, 0"/>
             <Button Style="{StaticResource Button}" Margin="100, 40" Content="Reroll selected dice"/>
         </WrapPanel>

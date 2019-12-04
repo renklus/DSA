@@ -10,6 +10,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Frontend.ViewModel;
+using Yahtzee;
 
 namespace Frontend.Views
 {
@@ -21,6 +23,9 @@ namespace Frontend.Views
         public Game()
         {
             InitializeComponent();
+
+            Game game = new Game();
+            DataContext = new GameViewModel(game);
         }
     }
 }

@@ -21,7 +21,7 @@
 
     <Style x:Key="GameLabel" TargetType="Label">
         <Setter Property="Width" Value="400"/>
-        <Setter Property="Margin" Value="0, 15, 0, 0"/>
+        <Setter Property="Margin" Value="0, 15, 0, 5"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
     </Style>
     

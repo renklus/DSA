@@ -33,5 +33,13 @@ namespace Yahtzee
             var service = new YahtzeeService(web3, receipt.ContractAddress);
 
         }
+
+        public int[] GetDice()
+        {
+            //TODO Complete Method
+            int [] Dices = new int[5];
+
+            return Dices;
+        }
     }
 }
