@@ -17,22 +17,14 @@ namespace Yahtzee
         private Web3 _web3;
         private bool _isGameStartedOrJoined = false;
 
-        public YahtzeeManager()
-        {
-
-        }
-
-        private void ConfigureBlockchain()
+        public YahtzeeManager(string _privateKey)
         {
             Account account = new Account(_privateKey);
             _web3 = new Web3(account, _url);
-
         }
-
+        
         private async Task<string> DeployContract(string partnerAddress)
         {
-            ConfigureBlockchain();
-
             var deployment = new YahtzeeDeployment()
             {
                 Partner = partnerAddress,
@@ -40,7 +32,6 @@ namespace Yahtzee
                 AmountToSend = 20
             };
             var receipt = await YahtzeeService.DeployContractAndWaitForReceiptAsync(_web3, deployment);
-            _service = new YahtzeeService(_web3, receipt.ContractAddress);
 
             return receipt.ContractAddress;
         }
@@ -60,8 +51,11 @@ namespace Yahtzee
             //Todo: Remove if
             if (string.IsNullOrWhiteSpace(partnerAddress))
                 partnerAddress = "0x08c31473a219f22922f47f001611d8bac62fbb6d";
+            
+            var contractId = await DeployContract(partnerAddress);
+            _service = new YahtzeeService(_web3, contractId);
 
-            return await DeployContract(partnerAddress);
+            return contractId;
         }
 
         public async Task JoinGame(string gameId)
@@ -70,7 +64,6 @@ namespace Yahtzee
                 throw new Exception("Game already started or joined.");
             _isGameStartedOrJoined = true;
 
-            ConfigureBlockchain();
             _service = new YahtzeeService(_web3, gameId);
             
             await _service.JoinGameRequestAndWaitForReceiptAsync();
