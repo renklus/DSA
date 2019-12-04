@@ -112,32 +112,6 @@ namespace YahtzeeContract.Yahtzee
             return ContractHandler.QueryAsync<PartnerJoinedFunction, bool>(null, blockParameter);
         }
 
-        public Task<string> AssignResultRequestAsync(AssignResultFunction assignResultFunction)
-        {
-             return ContractHandler.SendRequestAsync(assignResultFunction);
-        }
-
-        public Task<TransactionReceipt> AssignResultRequestAndWaitForReceiptAsync(AssignResultFunction assignResultFunction, CancellationTokenSource cancellationToken = null)
-        {
-             return ContractHandler.SendRequestAndWaitForReceiptAsync(assignResultFunction, cancellationToken);
-        }
-
-        public Task<string> AssignResultRequestAsync(byte scoringChoice)
-        {
-            var assignResultFunction = new AssignResultFunction();
-                assignResultFunction.ScoringChoice = scoringChoice;
-            
-             return ContractHandler.SendRequestAsync(assignResultFunction);
-        }
-
-        public Task<TransactionReceipt> AssignResultRequestAndWaitForReceiptAsync(byte scoringChoice, CancellationTokenSource cancellationToken = null)
-        {
-            var assignResultFunction = new AssignResultFunction();
-                assignResultFunction.ScoringChoice = scoringChoice;
-            
-             return ContractHandler.SendRequestAndWaitForReceiptAsync(assignResultFunction, cancellationToken);
-        }
-
         public Task<byte> OwnerDice5QueryAsync(OwnerDice5Function ownerDice5Function, BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryAsync<OwnerDice5Function, byte>(ownerDice5Function, blockParameter);
@@ -367,6 +341,42 @@ namespace YahtzeeContract.Yahtzee
         public Task<TransactionReceipt> JoinGameRequestAndWaitForReceiptAsync(CancellationTokenSource cancellationToken = null)
         {
              return ContractHandler.SendRequestAndWaitForReceiptAsync<JoinGameFunction>(null, cancellationToken);
+        }
+
+        public Task<string> AssignResultRequestAsync(AssignResultFunction assignResultFunction)
+        {
+             return ContractHandler.SendRequestAsync(assignResultFunction);
+        }
+
+        public Task<TransactionReceipt> AssignResultRequestAndWaitForReceiptAsync(AssignResultFunction assignResultFunction, CancellationTokenSource cancellationToken = null)
+        {
+             return ContractHandler.SendRequestAndWaitForReceiptAsync(assignResultFunction, cancellationToken);
+        }
+
+        public Task<string> AssignResultRequestAsync(byte scoringChoice, bool scoringHelpDice1, bool scoringHelpDice2, bool scoringHelpDice3, bool scoringHelpDice4, bool scoringHelpDice5)
+        {
+            var assignResultFunction = new AssignResultFunction();
+                assignResultFunction.ScoringChoice = scoringChoice;
+                assignResultFunction.ScoringHelpDice1 = scoringHelpDice1;
+                assignResultFunction.ScoringHelpDice2 = scoringHelpDice2;
+                assignResultFunction.ScoringHelpDice3 = scoringHelpDice3;
+                assignResultFunction.ScoringHelpDice4 = scoringHelpDice4;
+                assignResultFunction.ScoringHelpDice5 = scoringHelpDice5;
+            
+             return ContractHandler.SendRequestAsync(assignResultFunction);
+        }
+
+        public Task<TransactionReceipt> AssignResultRequestAndWaitForReceiptAsync(byte scoringChoice, bool scoringHelpDice1, bool scoringHelpDice2, bool scoringHelpDice3, bool scoringHelpDice4, bool scoringHelpDice5, CancellationTokenSource cancellationToken = null)
+        {
+            var assignResultFunction = new AssignResultFunction();
+                assignResultFunction.ScoringChoice = scoringChoice;
+                assignResultFunction.ScoringHelpDice1 = scoringHelpDice1;
+                assignResultFunction.ScoringHelpDice2 = scoringHelpDice2;
+                assignResultFunction.ScoringHelpDice3 = scoringHelpDice3;
+                assignResultFunction.ScoringHelpDice4 = scoringHelpDice4;
+                assignResultFunction.ScoringHelpDice5 = scoringHelpDice5;
+            
+             return ContractHandler.SendRequestAndWaitForReceiptAsync(assignResultFunction, cancellationToken);
         }
 
         public Task<string> PartnerQueryAsync(PartnerFunction partnerFunction, BlockParameter blockParameter = null)

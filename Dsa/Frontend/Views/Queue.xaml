@@ -13,6 +13,6 @@
     </Page.Resources>
 
     <Grid>
-        <Button Style="{StaticResource Button}" VerticalAlignment="Center" Margin="20" Content="Queue for a Game"/>
+        <Button Style="{StaticResource Button}" VerticalAlignment="Center" Margin="20" Content="Queue for a Game" Click="Button_Click"/>
     </Grid>
 </Page>

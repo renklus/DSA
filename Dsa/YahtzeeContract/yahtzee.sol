@@ -36,6 +36,9 @@ contract Yahtzee  is usingNRE{
     mapping(uint8 => bool) public _ownerUsedScoring;
     mapping(uint8 => bool) public _partnerUsedScoring;
     mapping(uint8 => ScoringOption) public ScoringOptionIndex;
+    uint16 _ownerScore = 0;
+    uint16 _partnerScore = 0;
+
 
     enum ScoringOption {
         One,
@@ -152,10 +155,18 @@ contract Yahtzee  is usingNRE{
             require(false, "Access denied");
     }
 
-    function assignResult(ScoringOption scoringChoice) public view{
+    function assignResult(ScoringOption scoringChoice,
+                    bool scoringHelpDice1, bool scoringHelpDice2, bool scoringHelpDice3, bool scoringHelpDice4, bool scoringHelpDice5)
+                    public {
+        uint8 scoringIndex = getScoringIndex(scoringChoice);
         if(msg.sender == _owner)
         {
-
+            require(!_ownerUsedScoring[scoringIndex], "Scoring was already used");
+            _ownerUsedScoring[scoringIndex] = true;
+            _ownerScore = getPoints(
+                _ownerDice1, _ownerDice2, _ownerDice3, _ownerDice4, _ownerDice5,
+                scoringChoice,
+                scoringHelpDice1, scoringHelpDice2, scoringHelpDice3, scoringHelpDice4, scoringHelpDice5);
         }
         else if(msg.sender == _partner)
         {
@@ -165,8 +176,335 @@ contract Yahtzee  is usingNRE{
             require(false, "Access denied");
     }
 
-    function getScoringIndex(ScoringOption scoringOption) private view returns (uint8)  {
+    function getPoints05(uint8 dice1, uint8 dice2, uint8 dice3, uint8 dice4, uint8 dice5, uint8 scoringChoice) private pure returns (uint8) {
+        uint8 score = 0;
 
+        if(dice1 == scoringChoice)
+            score += dice1;
+        if(dice2 == scoringChoice)
+            score += dice2;
+        if(dice3 == scoringChoice)
+            score += dice3;
+        if(dice4 == scoringChoice)
+            score += dice4;
+        if(dice5 == scoringChoice)
+            score += dice5;
+
+        return score;
+    }
+    function getPoints6(uint8 dice1, uint8 dice2, uint8 dice3, uint8 dice4, uint8 dice5,
+                    //bool scoringHelpDice1, bool scoringHelpDice2, bool scoringHelpDice3, bool scoringHelpDice4, bool scoringHelpDice5
+                    uint8 scoringHelpDices)
+                    private pure returns (uint8) {
+            uint8 value = 0;
+            uint8 dices = 0;
+            if(scoringHelpDices & 1 == 1) {
+                value = dice1;
+                dices++;
+            }
+            if(scoringHelpDices & 2 == 2) {
+                if(value == 0) {
+                    value = dice2;
+                    dices++;
+                }
+                else if(value == dice2)
+                    dices++;
+            }
+            if(scoringHelpDices & 4 == 4) {
+                if(value == 0) {
+                    value = dice3;
+                    dices++;
+                }
+                else if(value == dice3)
+                    dices++;
+            }
+            if(scoringHelpDices & 8 == 8) {
+                if(value == dice4)
+                    dices++;
+            }
+            if(scoringHelpDices & 16 == 16) {
+                if(value == dice5)
+                    dices++;
+            }
+            //require(dices >= 3, "Three of a kind must consist of at least 3 identical values");
+            if(dices >= 3) {
+                return dice1 + dice2 + dice3 + dice4 + dice5;
+            }
+            else
+                return 0;
+    }
+    function getPoints7(uint8 dice1, uint8 dice2, uint8 dice3, uint8 dice4, uint8 dice5,
+                    //bool scoringHelpDice1, bool scoringHelpDice2, bool scoringHelpDice3, bool scoringHelpDice4, bool scoringHelpDice5
+                    uint8 scoringHelpDices
+                    ) private pure returns (uint8) {
+        uint8 value = 0;
+        uint8 dices = 0;
+        if(scoringHelpDices & 1 == 1) {
+            value = dice1;
+            dices++;
+        }
+        if(scoringHelpDices & 2 == 2) {
+            if(value == 0) {
+                value = dice2;
+                dices++;
+            }
+            else if(value == dice2)
+                dices++;
+        }
+        if(scoringHelpDices & 4 == 4) {
+            if(value == dice3)
+                dices++;
+        }
+        if(scoringHelpDices & 8 == 8) {
+            if(value == dice4)
+                dices++;
+        }
+        if(scoringHelpDices & 16 == 16) {
+            if(value == dice5)
+                dices++;
+        }
+        //require(dices >= 4, "Four of a kind must consist of at least 4 identical values");
+        if(dices >= 4)
+            return dice1 + dice2 + dice3 + dice4 + dice5;
+        return 0;
+    }
+    function getPoints8(uint8 dice1, uint8 dice2, uint8 dice3, uint8 dice4, uint8 dice5,
+                    bool scoringHelpDice1, bool scoringHelpDice2, bool scoringHelpDice3, bool scoringHelpDice4, bool scoringHelpDice5)
+                    private pure returns (uint8) {
+        uint8 mainValue = 0;
+        uint8 mainDices = 0;
+        uint8 otherValue = 0;
+        uint8 otherDices = 0;
+
+        if(scoringHelpDice1) {
+            if(mainValue == 0) {
+                mainValue = dice1;
+                mainDices++;
+            }
+            else if(mainValue == dice1) {
+                //require(mainValue == dice1, "Invalid value for dice 1");
+                mainDices++;
+            }
+            else
+                return 0;
+        }
+        else {
+            if(otherValue == 0) {
+                otherValue = dice1;
+                otherDices++;
+            }
+            else if(otherValue == dice1) {
+                // require(otherValue == dice1, "Invalid value for dice 1");
+                otherDices++;
+            }
+            else
+                return 0;
+        }
+        if(scoringHelpDice2) {
+            if(mainValue == 0) {
+                mainValue = dice2;
+                mainDices++;
+            }
+            else if(mainValue == dice2) {
+                // require(mainValue == dice2, "Invalid value for dice 2");
+                mainDices++;
+            }
+            else
+                return 0;
+        }
+        else {
+            if(otherValue == 0) {
+                otherValue = dice2;
+                otherDices++;
+            }
+            else if(otherValue == dice2) {
+                // require(otherValue == dice2, "Invalid value for dice 2");
+                otherDices++;
+            }
+            else
+                return 0;
+        }
+        if(scoringHelpDice3) {
+            if(mainValue == 0) {
+                mainValue = dice3;
+                mainDices++;
+            }
+            else if(mainValue == dice3){
+                // require(mainValue == dice3, "Invalid value for dice 3");
+                mainDices++;
+            }
+            else
+                return 0;
+        }
+        else {
+            if(otherValue == 0) {
+                otherValue = dice3;
+                otherDices++;
+            }
+            else if(otherValue == dice3) {
+                // require(otherValue == dice3, "Invalid value for dice 3");
+                otherDices++;
+            }
+            else
+                return 0;
+        }
+        if(scoringHelpDice4) {
+            if(mainValue == 0) {
+                mainValue = dice4;
+                mainDices++;
+            }
+            else if(mainValue == dice4) {
+                // require(mainValue == dice4, "Invalid value for dice 4");
+                mainDices++;
+            }
+            else
+                return 0;
+        }
+        else {
+            if(otherValue == 0) {
+                otherValue = dice4;
+                otherDices++;
+            }
+            else if(otherValue == dice4) {
+                // require(otherValue == dice4, "Invalid value for dice 4");
+                otherDices++;
+            }
+            else
+                return 0;
+        }
+        if(scoringHelpDice5) {
+            if(mainValue == 0) {
+                mainValue = dice5;
+                mainDices++;
+            }
+            else if(mainValue == dice5){
+                // require(mainValue == dice5, "Invalid value for dice 5");
+                mainDices++;
+            }
+            else
+                return 0;
+        }
+        else {
+            if(otherValue == 0) {
+                otherValue = dice5;
+                otherDices++;
+            }
+            else if(otherValue == dice5) {
+                // require(otherValue == dice5, "Invalid value for dice 5");
+                otherDices++;
+            }
+            return 0;
+        }
+        // require(mainDices == 3 && otherDices == 2, "Invalid Full House");
+        return 25;
+    }
+    function getPoints9(uint8 dice1, uint8 dice2, uint8 dice3, uint8 dice4, uint8 dice5) private pure returns (uint8) {
+        if(
+            (
+                contains(3, dice1, dice2, dice3, dice4, dice5) &&
+                contains(4, dice1, dice2, dice3, dice4, dice5)
+            ) &&
+            (
+                (
+                    contains(1, dice1, dice2, dice3, dice4, dice5) &&
+                    contains(2, dice1, dice2, dice3, dice4, dice5)
+                ) ||
+                (
+                    contains(2, dice1, dice2, dice3, dice4, dice5) &&
+                    contains(5, dice1, dice2, dice3, dice4, dice5)
+                ) ||
+                (
+                    contains(5, dice1, dice2, dice3, dice4, dice5) &&
+                    contains(6, dice1, dice2, dice3, dice4, dice5)
+                )
+            ))
+            return 30;
+        else
+            return 0;
+    }
+    function getPoints10(uint8 dice1, uint8 dice2, uint8 dice3, uint8 dice4, uint8 dice5) private pure returns (uint8) {
+        if(
+            (
+                contains(2, dice1, dice2, dice3, dice4, dice5) &&
+                contains(3, dice1, dice2, dice3, dice4, dice5) &&
+                contains(4, dice1, dice2, dice3, dice4, dice5) &&
+                contains(5, dice1, dice2, dice3, dice4, dice5)
+            ) &&
+            (
+                contains(1, dice1, dice2, dice3, dice4, dice5) ||
+                contains(6, dice1, dice2, dice3, dice4, dice5)
+            ))
+            return 40;
+        else
+            return 0;
+    }
+    function getPoints11(uint8 dice1, uint8 dice2, uint8 dice3, uint8 dice4, uint8 dice5) private pure returns (uint8) {
+        if(dice1 == dice2 && dice1 == dice3 && dice1 == dice4 && dice1 == dice5)
+            return 50;
+        else
+            return 0;
+    }
+    function getPoints12(uint8 dice1, uint8 dice2, uint8 dice3, uint8 dice4, uint8 dice5) private pure returns (uint8) {
+        return dice1 + dice2 + dice3 + dice4 + dice5;
+    }
+    function getPoints(uint8 dice1, uint8 dice2, uint8 dice3, uint8 dice4, uint8 dice5,
+                    ScoringOption scoring,
+                    bool scoringHelpDice1, bool scoringHelpDice2, bool scoringHelpDice3, bool scoringHelpDice4, bool scoringHelpDice5)
+                    private view returns (uint8) {
+        uint8 scoringIndex = getScoringIndex(scoring);
+        if(scoringIndex >= 0 && scoringIndex <= 5)
+            return getPoints05(dice1, dice2, dice3, dice4, dice5, scoringIndex + 1);
+        else if(scoringIndex == 6)
+        {
+            uint8 scoringHelpDices = 0;
+            if(scoringHelpDice1)
+                scoringHelpDices = scoringHelpDices | 1;
+            if(scoringHelpDice2)
+                scoringHelpDices = scoringHelpDices | 2;
+            if(scoringHelpDice3)
+                scoringHelpDices = scoringHelpDices | 3;
+            if(scoringHelpDice4)
+                scoringHelpDices = scoringHelpDices | 4;
+            if(scoringHelpDice5)
+                scoringHelpDices = scoringHelpDices | 5;
+            return getPoints6(dice1, dice2, dice3, dice4, dice5, scoringHelpDices);
+        }
+        else if(scoringIndex == 7)
+        {
+            uint8 scoringHelpDices = 0;
+            if(scoringHelpDice1)
+                scoringHelpDices = scoringHelpDices | 1;
+            if(scoringHelpDice2)
+                scoringHelpDices = scoringHelpDices | 2;
+            if(scoringHelpDice3)
+                scoringHelpDices = scoringHelpDices | 3;
+            if(scoringHelpDice4)
+                scoringHelpDices = scoringHelpDices | 4;
+            if(scoringHelpDice5)
+                scoringHelpDices = scoringHelpDices | 5;
+            return getPoints7(dice1, dice2, dice3, dice4, dice5, scoringHelpDices);
+        }
+        else if(scoringIndex == 8)
+        {
+            return getPoints8(dice1, dice2, dice3, dice4, dice5, scoringHelpDice1, scoringHelpDice2, scoringHelpDice3, scoringHelpDice4, scoringHelpDice5);
+        }
+        else if(scoringIndex == 9) {
+            return getPoints9(dice1, dice2, dice3, dice4, dice5);
+        }
+        else if(scoringIndex == 10) {
+            return getPoints10(dice1, dice2, dice3, dice4, dice5);
+        }
+        else if(scoringIndex == 11) {
+            return getPoints11(dice1, dice2, dice3, dice4, dice5);
+        }
+        return getPoints12(dice1, dice2, dice3, dice4, dice5);
+    }
+
+    function contains(uint8 value, uint8 dice1, uint8 dice2, uint8 dice3, uint8 dice4, uint8 dice5) private pure returns (bool) {
+        return value == dice1 || value == dice2 || value == dice3 || value == dice4 || value == dice5;
+    }
+
+    function getScoringIndex(ScoringOption scoringOption) private view returns (uint8)  {
         for(uint8 i = 0; i < 12; i++)
         {
             if(scoringOption == ScoringOptionIndex[i])
