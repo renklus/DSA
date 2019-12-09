@@ -9,17 +9,16 @@ namespace Yahtzee
 {
     public class YahtzeeManager
     {
-        private string _privateAddress = Settings.Settings.PrivateAddress;
+        //private string _privateAddress = Settings.Settings.PrivateAddress;
         private string _url = Settings.Settings.Web3Url;
-        private string _privateKey = Settings.Settings.PrivateKey;
         private YahtzeeService _service;
         private byte _diceThrows = 0;
         private Web3 _web3;
         private bool _isGameStartedOrJoined = false;
 
-        public YahtzeeManager(string _privateKey)
+        public YahtzeeManager(string privateKey)
         {
-            Account account = new Account(_privateKey);
+            Account account = new Account(privateKey);
             _web3 = new Web3(account, _url);
         }
         
@@ -40,18 +39,13 @@ namespace Yahtzee
         /// Startet ein Spiel mit dem aktuell angemeldeten Spieler und dem angegebenen Partner
         /// </summary>
         /// <returns>Gibt die ID des Games zurück</returns>
-        /// <param name="partnerAddress"></param>
-        /// <returns></returns>
+        /// <param name="partnerAddress">z.B. "0x08c31473a219f22922f47f001611d8bac62fbb6d"</param>
         public async Task<string> StartGame(string partnerAddress)
         {
             if (_isGameStartedOrJoined)
                 throw new Exception("Game already started or joined.");
             _isGameStartedOrJoined = true;
 
-            //Todo: Remove if
-            if (string.IsNullOrWhiteSpace(partnerAddress))
-                partnerAddress = "0x08c31473a219f22922f47f001611d8bac62fbb6d";
-            
             var contractId = await DeployContract(partnerAddress);
             _service = new YahtzeeService(_web3, contractId);
 

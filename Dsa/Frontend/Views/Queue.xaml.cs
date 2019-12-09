@@ -28,7 +28,7 @@ namespace Frontend.Views
 
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            await new YahtzeeManager().DeployContract();
+            await new YahtzeeManager(Settings.Settings.PrivateKey).DeployContract();
         }
     }
 }
