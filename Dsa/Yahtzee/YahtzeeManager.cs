@@ -101,5 +101,16 @@ namespace Yahtzee
 
             return dices;
         }
+        //TODO: finish sending/receiving
+        public async Task SendMessage(string content)
+        {
+            
+        }
+
+        public async Task<string[]> ReceiveMessage()
+        {
+            var content = new string[16];
+            return content;
+        }
     }
 }
