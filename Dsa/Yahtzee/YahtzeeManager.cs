@@ -104,11 +104,14 @@ namespace Yahtzee
         //TODO: finish sending/receiving
         public async Task SendMessage(string content)
         {
-            
+            await _service.SendMessageRequestAndWaitForReceiptAsync(new byte[0] /*ToDo: Argument angeben*/);
         }
 
         public async Task<string[]> ReceiveMessage()
         {
+            var receivedObject = await _service.ReceiveMessagesQueryAsync();
+            //Todo: read from 'receivedObject'
+
             var content = new string[16];
             return content;
         }
