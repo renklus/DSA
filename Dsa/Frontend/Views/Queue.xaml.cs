@@ -28,7 +28,8 @@ namespace Frontend.Views
 
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            await new YahtzeeManager(Settings.Settings.PrivateKey).DeployContract();
+            //todo Adresse nicht fix
+            await new YahtzeeManager(Settings.Settings.PrivateKey).StartGame("0x08c31473a219f22922f47f001611d8bac62fbb6d");
         }
     }
 }
