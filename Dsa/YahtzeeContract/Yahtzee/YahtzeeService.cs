@@ -400,6 +400,42 @@ namespace YahtzeeContract.Yahtzee
             return ContractHandler.QueryAsync<PartnerFunction, string>(null, blockParameter);
         }
 
+        public Task<string> SendMessageRequestAsync(SendMessageFunction sendMessageFunction)
+        {
+             return ContractHandler.SendRequestAsync(sendMessageFunction);
+        }
+
+        public Task<TransactionReceipt> SendMessageRequestAndWaitForReceiptAsync(SendMessageFunction sendMessageFunction, CancellationTokenSource cancellationToken = null)
+        {
+             return ContractHandler.SendRequestAndWaitForReceiptAsync(sendMessageFunction, cancellationToken);
+        }
+
+        public Task<string> SendMessageRequestAsync(byte[] content)
+        {
+            var sendMessageFunction = new SendMessageFunction();
+                sendMessageFunction.Content = content;
+            
+             return ContractHandler.SendRequestAsync(sendMessageFunction);
+        }
+
+        public Task<TransactionReceipt> SendMessageRequestAndWaitForReceiptAsync(byte[] content, CancellationTokenSource cancellationToken = null)
+        {
+            var sendMessageFunction = new SendMessageFunction();
+                sendMessageFunction.Content = content;
+            
+             return ContractHandler.SendRequestAndWaitForReceiptAsync(sendMessageFunction, cancellationToken);
+        }
+
+        public Task<ReceiveMessagesOutputDTO> ReceiveMessagesQueryAsync(ReceiveMessagesFunction receiveMessagesFunction, BlockParameter blockParameter = null)
+        {
+            return ContractHandler.QueryDeserializingToObjectAsync<ReceiveMessagesFunction, ReceiveMessagesOutputDTO>(receiveMessagesFunction, blockParameter);
+        }
+
+        public Task<ReceiveMessagesOutputDTO> ReceiveMessagesQueryAsync(BlockParameter blockParameter = null)
+        {
+            return ContractHandler.QueryDeserializingToObjectAsync<ReceiveMessagesFunction, ReceiveMessagesOutputDTO>(null, blockParameter);
+        }
+
         public Task<byte> OwnerDice1QueryAsync(OwnerDice1Function ownerDice1Function, BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryAsync<OwnerDice1Function, byte>(ownerDice1Function, blockParameter);
