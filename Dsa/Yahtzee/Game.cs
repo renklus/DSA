@@ -5,15 +5,17 @@ using Yahtzee;
 
 namespace Yahtzee
 {
-    class Game
+    public class Game
     {
+        public Game()
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                Dices[i] = new Dice(){Number=i+1};
+            }
+        }
 
-        public int DiceOne { get; set; }
-        public int DiceTwo { get; set; }
-        public int DiceThree { get; set; }
-        public int DiceFour { get; set; }
-        public int DiceFive { get; set; }
-
+        public Dice[] Dices = new Dice[4];
         public int Round { get; set; }
 
     }

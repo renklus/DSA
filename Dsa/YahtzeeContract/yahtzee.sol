@@ -195,6 +195,13 @@ contract Yahtzee  is usingNRE{
             require(false, "Access denied");
     }
 
+    function getCurrentRoundNo() public view returns (uint8) {
+        if(msg.sender == _owner)
+        {
+            return _round;
+        }
+    }
+
     function assignResult(ScoringOption scoringChoice,
                     bool scoringHelpDice1, bool scoringHelpDice2, bool scoringHelpDice3, bool scoringHelpDice4, bool scoringHelpDice5)
                     public {
@@ -202,6 +209,7 @@ contract Yahtzee  is usingNRE{
         if(msg.sender == _owner)
         {
             require(!_ownerUsedScoring[scoringIndex], "Scoring was already used");
+            require(_ownerThrows > 0, "Must throw dice before scoring");
 
             _ownerLastSeen = block.number;
 
@@ -210,10 +218,12 @@ contract Yahtzee  is usingNRE{
                 _ownerDice1, _ownerDice2, _ownerDice3, _ownerDice4, _ownerDice5,
                 scoringChoice,
                 scoringHelpDice1, scoringHelpDice2, scoringHelpDice3, scoringHelpDice4, scoringHelpDice5);
+            _ownerThrows = 0;
         }
         else if(msg.sender == _partner)
         {
             require(!_partnerUsedScoring[scoringIndex], "Scoring was already used");
+            require(_partnerThrows > 0, "Must throw dice before scoring");
 
             _partnerLastSeen = block.number;
 
@@ -222,9 +232,12 @@ contract Yahtzee  is usingNRE{
                 _partnerDice1, _partnerDice2, _partnerDice3, _partnerDice4, _partnerDice5,
                 scoringChoice,
                 scoringHelpDice1, scoringHelpDice2, scoringHelpDice3, scoringHelpDice4, scoringHelpDice5);
+            _partnerThrows = 0;
         }
         else
             require(false, "Access denied");
+
+        _round++;
     }
 
     function getPoints05(uint8 dice1, uint8 dice2, uint8 dice3, uint8 dice4, uint8 dice5, uint8 scoringChoice) private pure returns (uint8) {
@@ -243,8 +256,8 @@ contract Yahtzee  is usingNRE{
 
         return score;
     }
+
     function getPoints6(uint8 dice1, uint8 dice2, uint8 dice3, uint8 dice4, uint8 dice5,
-                    //bool scoringHelpDice1, bool scoringHelpDice2, bool scoringHelpDice3, bool scoringHelpDice4, bool scoringHelpDice5
                     uint8 scoringHelpDices)
                     private pure returns (uint8) {
             uint8 value = 0;
@@ -283,8 +296,8 @@ contract Yahtzee  is usingNRE{
             else
                 return 0;
     }
+
     function getPoints7(uint8 dice1, uint8 dice2, uint8 dice3, uint8 dice4, uint8 dice5,
-                    //bool scoringHelpDice1, bool scoringHelpDice2, bool scoringHelpDice3, bool scoringHelpDice4, bool scoringHelpDice5
                     uint8 scoringHelpDices
                     ) private pure returns (uint8) {
         uint8 value = 0;
@@ -317,6 +330,7 @@ contract Yahtzee  is usingNRE{
             return dice1 + dice2 + dice3 + dice4 + dice5;
         return 0;
     }
+
     function getPoints8(uint8 dice1, uint8 dice2, uint8 dice3, uint8 dice4, uint8 dice5,
                     bool scoringHelpDice1, bool scoringHelpDice2, bool scoringHelpDice3, bool scoringHelpDice4, bool scoringHelpDice5)
                     private pure returns (uint8) {
@@ -436,6 +450,7 @@ contract Yahtzee  is usingNRE{
         }
         return 25;
     }
+
     function getPoints9(uint8 dice1, uint8 dice2, uint8 dice3, uint8 dice4, uint8 dice5) private pure returns (uint8) {
         if(
             (
@@ -460,6 +475,7 @@ contract Yahtzee  is usingNRE{
         else
             return 0;
     }
+
     function getPoints10(uint8 dice1, uint8 dice2, uint8 dice3, uint8 dice4, uint8 dice5) private pure returns (uint8) {
         if(
             (
@@ -476,15 +492,36 @@ contract Yahtzee  is usingNRE{
         else
             return 0;
     }
+
     function getPoints11(uint8 dice1, uint8 dice2, uint8 dice3, uint8 dice4, uint8 dice5) private pure returns (uint8) {
         if(dice1 == dice2 && dice1 == dice3 && dice1 == dice4 && dice1 == dice5)
             return 50;
         else
             return 0;
     }
+
     function getPoints12(uint8 dice1, uint8 dice2, uint8 dice3, uint8 dice4, uint8 dice5) private pure returns (uint8) {
         return dice1 + dice2 + dice3 + dice4 + dice5;
     }
+
+    function getScoringHelpDicesAsFlags(
+        bool scoringHelpDice1, bool scoringHelpDice2, bool scoringHelpDice3, bool scoringHelpDice4, bool scoringHelpDice5)
+        private pure returns (uint8) {
+            uint8 scoringHelpDices = 0;
+            if(scoringHelpDice1)
+                scoringHelpDices |= 1;
+            if(scoringHelpDice2)
+                scoringHelpDices |= 2;
+            if(scoringHelpDice3)
+                scoringHelpDices |= 4;
+            if(scoringHelpDice4)
+                scoringHelpDices |= 8;
+            if(scoringHelpDice5)
+                scoringHelpDices |= 16;
+
+            return scoringHelpDices;
+    }
+
     function getPoints(uint8 dice1, uint8 dice2, uint8 dice3, uint8 dice4, uint8 dice5,
                     ScoringOption scoring,
                     bool scoringHelpDice1, bool scoringHelpDice2, bool scoringHelpDice3, bool scoringHelpDice4, bool scoringHelpDice5)
@@ -494,32 +531,12 @@ contract Yahtzee  is usingNRE{
             return getPoints05(dice1, dice2, dice3, dice4, dice5, scoringIndex + 1);
         else if(scoringIndex == 6)
         {
-            uint8 scoringHelpDices = 0;
-            if(scoringHelpDice1)
-                scoringHelpDices = scoringHelpDices | 1;
-            if(scoringHelpDice2)
-                scoringHelpDices = scoringHelpDices | 2;
-            if(scoringHelpDice3)
-                scoringHelpDices = scoringHelpDices | 3;
-            if(scoringHelpDice4)
-                scoringHelpDices = scoringHelpDices | 4;
-            if(scoringHelpDice5)
-                scoringHelpDices = scoringHelpDices | 5;
+            uint8 scoringHelpDices = getScoringHelpDicesAsFlags(scoringHelpDice1, scoringHelpDice2, scoringHelpDice3, scoringHelpDice4, scoringHelpDice5);
             return getPoints6(dice1, dice2, dice3, dice4, dice5, scoringHelpDices);
         }
         else if(scoringIndex == 7)
         {
-            uint8 scoringHelpDices = 0;
-            if(scoringHelpDice1)
-                scoringHelpDices = scoringHelpDices | 1;
-            if(scoringHelpDice2)
-                scoringHelpDices = scoringHelpDices | 2;
-            if(scoringHelpDice3)
-                scoringHelpDices = scoringHelpDices | 3;
-            if(scoringHelpDice4)
-                scoringHelpDices = scoringHelpDices | 4;
-            if(scoringHelpDice5)
-                scoringHelpDices = scoringHelpDices | 5;
+            uint8 scoringHelpDices = getScoringHelpDicesAsFlags(scoringHelpDice1, scoringHelpDice2, scoringHelpDice3, scoringHelpDice4, scoringHelpDice5);
             return getPoints7(dice1, dice2, dice3, dice4, dice5, scoringHelpDices);
         }
         else if(scoringIndex == 8)

@@ -125,8 +125,8 @@ namespace Frontend.ViewModel
             ThreeOfAKind = Score.ThreeOfAKind;
             FourOfAKind = Score.FourOfAKind;
             FullHouse = Score.FullHouse;
-            LowStraight = Score.LowStraight;
-            HighStraight = Score.HighStraight;
+            LowStraight = Score.SmallStreet;
+            HighStraight = Score.LargeStreet;
             Yahtzee = Score.Yahtzee;
             Chance = Score.Chance;
         }
@@ -142,8 +142,8 @@ namespace Frontend.ViewModel
             Score.ThreeOfAKind = ThreeOfAKind;
             Score.FourOfAKind = FourOfAKind;
             Score.FullHouse = FullHouse;
-            Score.LowStraight = LowStraight;
-            Score.HighStraight = HighStraight;
+            Score.SmallStreet = LowStraight;
+            Score.LargeStreet = HighStraight;
             Score.Yahtzee = Yahtzee;
             Score.Chance = Chance;
 

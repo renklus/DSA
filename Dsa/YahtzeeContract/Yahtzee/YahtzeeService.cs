@@ -90,6 +90,17 @@ namespace YahtzeeContract.Yahtzee
             return ContractHandler.QueryAsync<ScoringOptionIndexFunction, byte>(scoringOptionIndexFunction, blockParameter);
         }
 
+        public Task<byte> GetCurrentRoundNoQueryAsync(GetCurrentRoundNoFunction getCurrentRoundNoFunction, BlockParameter blockParameter = null)
+        {
+            return ContractHandler.QueryAsync<GetCurrentRoundNoFunction, byte>(getCurrentRoundNoFunction, blockParameter);
+        }
+
+        
+        public Task<byte> GetCurrentRoundNoQueryAsync(BlockParameter blockParameter = null)
+        {
+            return ContractHandler.QueryAsync<GetCurrentRoundNoFunction, byte>(null, blockParameter);
+        }
+
         public Task<byte> OwnerDice2QueryAsync(OwnerDice2Function ownerDice2Function, BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryAsync<OwnerDice2Function, byte>(ownerDice2Function, blockParameter);
