@@ -18,14 +18,14 @@ namespace Frontend.Views
     /// <summary>
     /// Interaction logic for Game.xaml
     /// </summary>
-    public partial class Game : Page
+    public partial class GamePage : Page
     {
-        public Game()
+        public GamePage()
         {
             InitializeComponent();
 
             Game game = new Game();
-            DataContext = new GameViewModel(game);
+            DataContext = new GameViewPageModel(game);
         }
     }
 }

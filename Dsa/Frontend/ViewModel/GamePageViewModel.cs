@@ -5,15 +5,15 @@ using Frontend.Views;
 
 namespace Frontend.ViewModel
 {
-    class GameViewModel : BindableBase
+    public class GameViewPageModel : BindableBase
     {
 
 
-        public Game Game { get; set; }
+        public Game CurrentGame { get; set; }
 
-        public GameViewModel(Game game)
+        public GameViewPageModel(Game currentgame)
         {
-            this.Game = game;
+            this.CurrentGame = currentgame;
         }
 
         private int _diceone;
@@ -49,6 +49,11 @@ namespace Frontend.ViewModel
         {
             get { return _dicefive; }
             set { SetProperty(ref _dicefive, value); }
+        }
+
+        public void Roll()
+        {
+            
         }
     }
 }
