@@ -26,12 +26,17 @@ namespace Yahtzee
 
         public bool FullHouse { get; set; }
 
-        public bool LowStraight { get; set; }
+        public bool SmallStreet { get; set; }
 
-        public bool HighStraight { get; set; }
+        public bool LargeStreet { get; set; }
 
         public bool Yahtzee { get; set; }
 
         public int Chance { get; set; }
+
+        public int Total =>
+            Ones + Twos + Threes + Fours + Fives + Sixes + ThreeOfAKind + FourOfAKind +
+            (FullHouse ? 25 : 0) + (SmallStreet ? 30 : 0) + (LargeStreet ? 40 : 0) + (Yahtzee ? 50 : 0) +
+            Chance;
     }
 }
