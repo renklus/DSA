@@ -419,19 +419,16 @@ namespace Yahtzee
             return dices.diceA == targetNo || dices.diceB == targetNo || dices.diceC == targetNo || dices.diceD == targetNo || dices.diceE == targetNo;
         }
 
-        //TODO: finish sending/receiving
         public async Task SendMessageAsync(string content)
         {
-            await _service.SendMessageRequestAndWaitForReceiptAsync(new byte[0] /*ToDo: Argument angeben*/);
+            await _service.SendMessageRequestAndWaitForReceiptAsync(System.Text.Encoding.UTF8.GetBytes(content));
         }
-
+        //get last 16 messages from blockchain
         public async Task<string[]> ReceiveMessageAsync()
         {
             var receivedObject = await _service.ReceiveMessagesQueryAsync();
-            //Todo: read from 'receivedObject'
-
-            var content = new string[16];
-            return content;
+            var texts = receivedObject.ReturnValue1.Select(byteValue => System.Text.Encoding.UTF8.GetString(byteValue)).ToArray();
+            return texts;
         }
     }
 }
