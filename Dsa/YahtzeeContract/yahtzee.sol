@@ -45,6 +45,23 @@ contract Yahtzee  is usingNRE{
         Chance
     }
 
+    struct Message {
+       bytes32 content;
+       uint timestamp;
+       address sender;
+    }
+
+    struct Inbox {
+        uint numMessages;
+        mapping (uint => Message) sentMessages;
+        mapping (address => address) users;
+    }
+
+    mapping (address => Inbox) userInbox;
+
+    Inbox newInbox;
+    Message newMessage;
+
     constructor (address payable partner, uint stake) public payable {
         require(msg.value >= stake, "Not enough stake provided");
 
@@ -67,6 +84,12 @@ contract Yahtzee  is usingNRE{
         ScoringOptionIndex[10] = ScoringOption.LargeStreet;
         ScoringOptionIndex[11] = ScoringOption.Yahtzee;
         ScoringOptionIndex[12] = ScoringOption.Chance;
+
+        userInbox[_owner] = newInbox;
+        userInbox[_partner] = newInbox;
+        newInbox.users[_owner] = _partner;
+        newInbox.numMessages = 0;
+
     }
 
     function abortGame() public {
@@ -631,17 +654,33 @@ contract Yahtzee  is usingNRE{
         return result;
     }
 
-    //function rollDice() public view returns(uint8[5] memory) {
-	//	uint8[5] memory dice;
-	//	dice[0] = uint8((ra() % 6) + 1);
-	//	dice[1] = uint8((rb() % 6) + 1);
-	//	dice[2] = uint8((rc() % 6) + 1);
-	//	dice[3] = uint8((rd() % 6) + 1);
-	//	dice[4] = uint8((rd() % 6) + 1);
+    function sendMessage(bytes32 _content) public {
+        newMessage.content = _content;
+        newMessage.timestamp = now;
+        newMessage.sender = _owner;
 
-	//	return dice;
-	//}
+        Inbox storage sharedInbox = userInbox[msg.sender];
+        sharedInbox.sentMessages[sharedInbox.numMessages] = newMessage;
+        sharedInbox.numMessages++;
 
+        return;
+    }
+
+
+    function receiveMessages() public view returns (bytes32[16] memory, uint[] memory, address[] memory) {
+        Inbox storage sharedInbox = userInbox[msg.sender];
+        bytes32[16] memory content;
+        address[] memory sender = new address[](16);
+        uint[] memory timestamp = new uint[](16);
+
+        for (uint m = 0; m<15; m++) {
+            Message memory message = sharedInbox.sentMessages[m];
+            content[m] = message.content;
+            sender[m] = message.sender;
+            timestamp[m] = message.timestamp;
+        }
+    return (content, timestamp, sender);
+    }
 
     // function examples() private view  {
     //     address anAddress;
