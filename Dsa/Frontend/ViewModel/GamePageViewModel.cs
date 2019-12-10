@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Frontend.Views;
+using Yahtzee;
 
 namespace Frontend.ViewModel
 {
@@ -53,7 +54,7 @@ namespace Frontend.ViewModel
 
         public void Roll()
         {
-            
+
         }
     }
 }
