@@ -145,7 +145,6 @@ namespace Yahtzee
 
         public async Task ScoreAsync(Score currentScore, Game currentGame, ScoreIndex scoreAs)
         {
-            bool dice1, dice2, dice3, dice4, dice5;
             switch (scoreAs)
             {
                 case ScoreIndex.Ones:
@@ -263,7 +262,7 @@ namespace Yahtzee
                     break;
                 case ScoreIndex.ThreeOfAKind:
                     {
-                        (int dice1, int dice2, int dice3) dices = (0, 0, 0);
+                        (int diceA, int diceB, int diceC) dices = (0, 0, 0);
                         currentScore.ThreeOfAKind = currentGame.Dices.Any(d =>
                             currentGame.Dices.Any(e => d.Number != e.Number &&
                                                        currentGame.Dices.Any(f =>
@@ -289,7 +288,7 @@ namespace Yahtzee
                     }
                 case ScoreIndex.FourOfAKind:
                     {
-                        (int dice1, int dice2, int dice3, int dice4) dices = (0, 0, 0, 0);
+                        (int diceA, int diceB, int diceC, int diceD) dices = (0, 0, 0, 0);
                         currentScore.FourOfAKind = currentGame.Dices.Any(d =>
                             currentGame.Dices.Any(e => d.Number != e.Number &&
                                                        currentGame.Dices.Any(f => d.Number != f.Number &&
@@ -320,7 +319,7 @@ namespace Yahtzee
                     }
                 case ScoreIndex.FullHouse:
                     {
-                        (int dice1, int dice2, int dice3) dices = (0, 0, 0);
+                        (int diceA, int diceB, int diceC) dices = (0, 0, 0);
                         currentScore.FullHouse = currentGame.Dices.Any(d =>
                             currentGame.Dices.Any(e => d.Number != e.Number &&
                                                        currentGame.Dices.Any(f => d.Number != f.Number &&
@@ -406,18 +405,18 @@ namespace Yahtzee
             }
         }
 
-        private bool ContainsDiceNo((int dice1, int dice2, int dice3) dices, int targetNo)
+        private bool ContainsDiceNo((int diceA, int diceB, int diceC) dices, int targetNo)
         {
-            return dices.dice1 == targetNo || dices.dice2 == targetNo || dices.dice3 == targetNo;
+            return dices.diceA == targetNo || dices.diceB == targetNo || dices.diceC == targetNo;
         }
 
-        private bool ContainsDiceNo((int dice1, int dice2, int dice3, int dice4) dices, int targetNo)
+        private bool ContainsDiceNo((int diceA, int diceB, int diceC, int diceD) dices, int targetNo)
         {
-            return dices.dice1 == targetNo || dices.dice2 == targetNo || dices.dice3 == targetNo || dices.dice4 == targetNo;
+            return dices.diceA == targetNo || dices.diceB == targetNo || dices.diceC == targetNo || dices.diceD == targetNo;
         }
-        private bool ContainsDiceNo((int dice1, int dice2, int dice3, int dice4, int dice5) dices, int targetNo)
+        private bool ContainsDiceNo((int diceA, int diceB, int diceC, int diceD, int diceE) dices, int targetNo)
         {
-            return dices.dice1 == targetNo || dices.dice2 == targetNo || dices.dice3 == targetNo || dices.dice4 == targetNo || dices.dice5 == targetNo;
+            return dices.diceA == targetNo || dices.diceB == targetNo || dices.diceC == targetNo || dices.diceD == targetNo || dices.diceE == targetNo;
         }
 
         //TODO: finish sending/receiving
