@@ -204,69 +204,165 @@ namespace Yahtzee
                     throw new ArgumentOutOfRangeException(nameof(scoreAs), scoreAs, null);
             }
 
+            byte scoreAsIndex = (byte)(scoreAs - 1);
             switch (scoreAs)
             {
                 case ScoreIndex.Ones:
                     currentScore.Ones = currentGame.Dices.Sum(d => d.Value == 1 ? 1 : 0);
+                    await _service.AssignResultRequestAndWaitForReceiptAsync(scoreAsIndex,
+                        false,
+                        false,
+                        false,
+                        false,
+                        false);
                     break;
                 case ScoreIndex.Twos:
                     currentScore.Twos = currentGame.Dices.Sum(d => d.Value == 2 ? 2 : 0);
+                    await _service.AssignResultRequestAndWaitForReceiptAsync(scoreAsIndex,
+                        false,
+                        false,
+                        false,
+                        false,
+                        false);
                     break;
                 case ScoreIndex.Threes:
                     currentScore.Threes = currentGame.Dices.Sum(d => d.Value == 3 ? 3 : 0);
+                    await _service.AssignResultRequestAndWaitForReceiptAsync(scoreAsIndex,
+                        false,
+                        false,
+                        false,
+                        false,
+                        false);
                     break;
                 case ScoreIndex.Fours:
                     currentScore.Fours = currentGame.Dices.Sum(d => d.Value == 4 ? 4 : 0);
+                    await _service.AssignResultRequestAndWaitForReceiptAsync(scoreAsIndex,
+                        false,
+                        false,
+                        false,
+                        false,
+                        false);
                     break;
                 case ScoreIndex.Fives:
                     currentScore.Fives = currentGame.Dices.Sum(d => d.Value == 5 ? 5 : 0);
+                    await _service.AssignResultRequestAndWaitForReceiptAsync(scoreAsIndex,
+                        false,
+                        false,
+                        false,
+                        false,
+                        false);
                     break;
                 case ScoreIndex.Sixes:
                     currentScore.Sixes = currentGame.Dices.Sum(d => d.Value == 6 ? 6 : 0);
+                    await _service.AssignResultRequestAndWaitForReceiptAsync(scoreAsIndex,
+                        false,
+                        false,
+                        false,
+                        false,
+                        false);
                     break;
                 case ScoreIndex.ThreeOfAKind:
-                    (int dice1, int dice2, int dice3) dices = (0, 0, 0);
-                    currentScore.ThreeOfAKind = currentGame.Dices.Any(d =>
-                        currentGame.Dices.Any(e => d.Number != e.Number &&
-                            currentGame.Dices.Any(f =>
-                            {
-                                var foundSolution = d.Number != f.Number &&
-                                                    d.Value == e.Value && d.Value == f.Value;
-                                if (foundSolution)
-                                    dices = (d.Number, e.Number, f.Number);
-                                return foundSolution;
-                            })
+                    {
+                        (int dice1, int dice2, int dice3) dices = (0, 0, 0);
+                        currentScore.ThreeOfAKind = currentGame.Dices.Any(d =>
+                            currentGame.Dices.Any(e => d.Number != e.Number &&
+                                                       currentGame.Dices.Any(f =>
+                                                       {
+                                                           var solution = d.Number != f.Number &&
+                                                                          d.Value == e.Value &&
+                                                                          d.Value == f.Value;
+                                                           if (solution)
+                                                               dices = (d.Number, e.Number, f.Number);
+                                                           return solution;
+                                                       })
                             )
                         )
-                        ? currentGame.Dices.Sum(d => d.Value)
-                        : 0;
-                    await _service.AssignResultRequestAndWaitForReceiptAsync((byte)scoreAs, ContainsDiceNo(dices, 1),
-                        ContainsDiceNo(dices, 2), ContainsDiceNo(dices, 3), ContainsDiceNo(dices, 4),
-                        ContainsDiceNo(dices, 5));
-                    break;
+                            ? currentGame.Dices.Sum(d => d.Value)
+                            : 0;
+                        await _service.AssignResultRequestAndWaitForReceiptAsync(scoreAsIndex,
+                            ContainsDiceNo(dices, 1),
+                            ContainsDiceNo(dices, 2),
+                            ContainsDiceNo(dices, 3),
+                            ContainsDiceNo(dices, 4),
+                            ContainsDiceNo(dices, 5));
+                        break;
+                    }
                 case ScoreIndex.FourOfAKind:
-                    currentScore.FourOfAKind = currentGame.Dices.Any(d =>
-                        currentGame.Dices.Any(e => d.Number != e.Number &&
-                            currentGame.Dices.Any(f => d.Number != f.Number &&
-                                currentGame.Dices.Any(g => d.Number != g.Number &&
-                                    d.Value == e.Value && d.Value == f.Value && d.Value == g.Value))))
-                        ? currentGame.Dices.Sum(d => d.Value)
-                        : 0;
-                    break;
+                    {
+                        (int dice1, int dice2, int dice3, int dice4) dices = (0, 0, 0, 0);
+                        currentScore.FourOfAKind = currentGame.Dices.Any(d =>
+                            currentGame.Dices.Any(e => d.Number != e.Number &&
+                                                       currentGame.Dices.Any(f => d.Number != f.Number &&
+                                                                                  currentGame.Dices.Any(g =>
+                                                                                  {
+                                                                                      var solution =
+                                                                                          d.Number != g.Number &&
+                                                                                          d.Value == e.Value &&
+                                                                                          d.Value == f.Value &&
+                                                                                          d.Value == g.Value;
+                                                                                      if (solution)
+                                                                                          dices = (d.Number, e.Number,
+                                                                                              f.Number, g.Number);
+                                                                                      return solution;
+                                                                                  })
+                                                       )
+                            )
+                        )
+                            ? currentGame.Dices.Sum(d => d.Value)
+                            : 0;
+                        await _service.AssignResultRequestAndWaitForReceiptAsync(scoreAsIndex,
+                            ContainsDiceNo(dices, 1),
+                            ContainsDiceNo(dices, 2),
+                            ContainsDiceNo(dices, 3),
+                            ContainsDiceNo(dices, 4),
+                            ContainsDiceNo(dices, 5));
+                        break;
+                    }
                 case ScoreIndex.FullHouse:
-                    currentScore.FullHouse = currentGame.Dices.Any(d =>
-                        currentGame.Dices.Any(e => d.Number != e.Number &&
-                            currentGame.Dices.Any(f => d.Number != f.Number &&
-                                currentGame.Dices.Any(g => d.Number != g.Number &&
-                                    currentGame.Dices.Any(h => d.Number != h.Number &&
-                                        d.Value == e.Value && d.Value == f.Value && d.Value != g.Value && g.Value == h.Value)))));
-                    break;
+                    {
+                        (int dice1, int dice2, int dice3) dices = (0, 0, 0);
+                        currentScore.FullHouse = currentGame.Dices.Any(d =>
+                            currentGame.Dices.Any(e => d.Number != e.Number &&
+                                                       currentGame.Dices.Any(f => d.Number != f.Number &&
+                                                                                  currentGame.Dices.Any(g =>
+                                                                                      d.Number != g.Number &&
+                                                                                      currentGame.Dices.Any(h =>
+                                                                                      {
+                                                                                          var solution =
+                                                                                              d.Number != h.Number &&
+                                                                                              d.Value == e.Value &&
+                                                                                              d.Value == f.Value &&
+                                                                                              d.Value != g.Value &&
+                                                                                              g.Value == h.Value;
+                                                                                          if (solution)
+                                                                                              dices = (d.Number, e.Number,
+                                                                                                  f.Number);
+                                                                                          return solution;
+                                                                                      })
+                                                                                  )
+                                                       )
+                            )
+                        );
+                        await _service.AssignResultRequestAndWaitForReceiptAsync(scoreAsIndex,
+                            ContainsDiceNo(dices, 1),
+                            ContainsDiceNo(dices, 2),
+                            ContainsDiceNo(dices, 3),
+                            ContainsDiceNo(dices, 4),
+                            ContainsDiceNo(dices, 5));
+                        break;
+                    }
                 case ScoreIndex.SmallStreet:
                     currentScore.SmallStreet = currentGame.Dices.Any(d =>
                         currentGame.Dices.Any(e => d.Number != e.Number &&
                             currentGame.Dices.Any(f => d.Number != f.Number &&
                                 currentGame.Dices.Any(g => d.Number != g.Number &&
                                     d.Value == e.Value + 1 && d.Value == f.Value + 2 && d.Value == g.Value + 3))));
+                    await _service.AssignResultRequestAndWaitForReceiptAsync(scoreAsIndex,
+                        false,
+                        false,
+                        false,
+                        false,
+                        false);
                     break;
                 case ScoreIndex.LargeStreet:
                     currentScore.LargeStreet = currentGame.Dices.Any(d =>
@@ -275,6 +371,12 @@ namespace Yahtzee
                                 currentGame.Dices.Any(g => d.Number != g.Number &&
                                     currentGame.Dices.Any(h => d.Number != h.Number &&
                                         d.Value == e.Value + 1 && d.Value == f.Value + 2 && d.Value == g.Value + 3 && d.Value == h.Value + 4)))));
+                    await _service.AssignResultRequestAndWaitForReceiptAsync(scoreAsIndex,
+                        false,
+                        false,
+                        false,
+                        false,
+                        false);
                     break;
                 case ScoreIndex.Yahtzee:
                     currentScore.Yahtzee = currentGame.Dices.Any(d =>
@@ -283,9 +385,21 @@ namespace Yahtzee
                                 currentGame.Dices.Any(g => d.Number != g.Number &&
                                     currentGame.Dices.Any(h => d.Number != h.Number &&
                                         d.Value == e.Value && d.Value == f.Value && d.Value == g.Value && d.Value == h.Value)))));
+                    await _service.AssignResultRequestAndWaitForReceiptAsync(scoreAsIndex,
+                        false,
+                        false,
+                        false,
+                        false,
+                        false);
                     break;
                 case ScoreIndex.Chance:
                     currentScore.Chance = currentGame.Dices.Sum(d => d.Value);
+                    await _service.AssignResultRequestAndWaitForReceiptAsync(scoreAsIndex,
+                        false,
+                        false,
+                        false,
+                        false,
+                        false);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(scoreAs), scoreAs, null);
