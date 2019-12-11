@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Frontend.Views"
       mc:Ignorable="d" 
-      d:DesignHeight="420" d:DesignWidth="1030"
+      d:DesignHeight="440" d:DesignWidth="1030"
       Title="Game">
 
     <Window.Resources>
@@ -16,6 +16,8 @@
     <StackPanel Orientation="Horizontal">
         <Frame x:Name="ChatFrame" Source="Chat.xaml" Height="380" Width="310"/>
         <WrapPanel Orientation="Horizontal" Width="400">
+            <Label>GameID:</Label>
+            <Label Content="{Binding GameID}"/>
             <Label Style="{StaticResource GameLabel}">Dice Roll 1</Label>
             <TextBlock Width="200" Text="{Binding DiceOne}"></TextBlock>
             <CheckBox Margin="80, 0"/>
