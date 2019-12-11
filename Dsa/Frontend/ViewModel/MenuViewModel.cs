@@ -9,14 +9,5 @@ namespace Frontend.ViewModel
     {
         public RelayCommand GoToCommand { get; set; }
 
-        public MenuViewModel()
-        {
-            GoToCommand = new RelayCommand(GoTo);
-        }
-
-        public void GoTo()
-        {
-            
-        }
     }
 }

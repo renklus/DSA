@@ -18,7 +18,7 @@ namespace Frontend.Views
     /// <summary>
     /// Interaction logic for Game.xaml
     /// </summary>
-    public partial class GamePage : Page
+    public partial class GamePage : Window
     {
         public GamePage()
         {

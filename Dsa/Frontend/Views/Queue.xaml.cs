@@ -30,12 +30,16 @@ namespace Frontend.Views
         {
             //todo Adresse nicht fix
             await new YahtzeeManager(Settings.Settings.PrivateKey).StartGameAsync("0x08c31473a219f22922f47f001611d8bac62fbb6d");
+            Window game = new GamePage();
+            game.Show();
         }
 
         private async void Button_Click2(object sender, RoutedEventArgs e)
         {
             //todo Adresse nicht fix
             await new YahtzeeManager(Settings.Settings.PrivateKey).JoinGameAsync(_gameid.Text);
+            Window game = new GamePage();
+            game.Show();
         }
     }
 }
