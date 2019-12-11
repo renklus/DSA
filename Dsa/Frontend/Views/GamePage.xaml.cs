@@ -29,7 +29,7 @@ namespace Frontend.Views
             DataContext = new GamePageViewModel(game);
         }
 
-        private async Task Button_Click3(object sender, RoutedEventArgs e)
+        private async void Button_Click3(object sender, RoutedEventArgs e)
         {
             await ((GamePageViewModel) DataContext).Roll();
         }
