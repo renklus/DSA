@@ -61,15 +61,52 @@ namespace Frontend.ViewModel
             set { SetProperty(ref _dicefive, value); }
         }
 
-        public bool ChangeDiceOne = true;
-        public bool ChangeDiceTwo = true;
-        public bool ChangeDiceThree = true;
-        public bool ChangeDiceFour = true;
-        public bool ChangeDiceFive = true;
+        private bool _changeDiceOne = true;
+        public bool ChangeDiceOne
+        {
+            get { return _changeDiceOne; }
+            set { SetProperty(ref _changeDiceOne, value); }
+        }
 
-        
+
+        private bool _changeDiceTwo = true;
+        public bool ChangeDiceTwo
+        {
+            get { return _changeDiceTwo; }
+            set { SetProperty(ref _changeDiceTwo, value); }
+        }
+
+        private bool _changeDiceThree = true;
+        public bool ChangeDiceThree
+        {
+            get { return _changeDiceThree; }
+            set { SetProperty(ref _changeDiceThree, value); }
+        }
+
+        private bool _changeDiceFour = true;
+        public bool ChangeDiceFour
+        {
+            get { return _changeDiceFour; }
+            set { SetProperty(ref _changeDiceFour, value); }
+        }
+
+        private bool _changeDiceFive = true;
+        public bool ChangeDiceFive
+        {
+            get { return _changeDiceFive; }
+            set { SetProperty(ref _changeDiceFive, value); }
+        }
+
+        private bool _buttonEnabled = true;
+        public bool ButtonEnabled
+        {
+            get { return _buttonEnabled; }
+            set { SetProperty(ref _buttonEnabled, value); }
+        }
+
         public async Task Reroll()
         {
+            ButtonEnabled = false;
             try
             {
                 var result = await SettingsStore.YahtzeeManager.ThrowDiceAsync(ChangeDiceOne, ChangeDiceTwo, ChangeDiceThree,
@@ -86,6 +123,8 @@ namespace Frontend.ViewModel
 
                 throw;
             }
+
+            ButtonEnabled = true;
         }
     }
 }
