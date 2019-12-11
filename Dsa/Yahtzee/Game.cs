@@ -15,7 +15,7 @@ namespace Yahtzee
             }
         }
 
-        public Dice[] Dices = new Dice[4];
+        public Dice[] Dices = new Dice[5];
         public int Round { get; set; }
 
     }

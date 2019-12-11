@@ -11,6 +11,6 @@ namespace Yahtzee
 
         public string Wallet { get; set; }
 
-        public SecureString PrivateKey { get; set; }
+        public string PrivateKey { get; set; }
     }
 }
