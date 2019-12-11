@@ -17,23 +17,23 @@
         <Frame x:Name="ChatFrame" Source="Chat.xaml" Height="380" Width="310"/>
         <WrapPanel Orientation="Horizontal" Width="400">
             <Label>GameID:</Label>
-            <Label Content="{Binding GameID}"/>
+            <Label Content="{Binding GameId}"/>
             <Label Style="{StaticResource GameLabel}">Dice Roll 1</Label>
             <TextBlock Width="200" Text="{Binding DiceOne}"></TextBlock>
-            <CheckBox Margin="80, 0"/>
+            <CheckBox IsChecked="{Binding ChangeDiceOne}" Margin="80, 0"/>
             <Label Style="{StaticResource GameLabel}">Dice Roll 2</Label>
             <TextBlock Width="200" Text="{Binding DiceTwo}"></TextBlock>
-            <CheckBox Margin="80, 0"/>
+            <CheckBox IsChecked="{Binding ChangeDiceTwo}" Margin="80, 0"/>
             <Label Style="{StaticResource GameLabel}">Dice Roll 3</Label>
             <TextBlock Width="200" Text="{Binding DiceThree}"></TextBlock>
-            <CheckBox Margin="80, 0"/>
+            <CheckBox IsChecked="{Binding ChangeDiceThree}" Margin="80, 0"/>
             <Label Style="{StaticResource GameLabel}">Dice Roll 4</Label>
             <TextBlock Width="200" Text="{Binding DiceFour}"></TextBlock>
-            <CheckBox Margin="80, 0"/>
+            <CheckBox IsChecked="{Binding ChangeDiceFour}" Margin="80, 0"/>
             <Label Style="{StaticResource GameLabel}">Dice Roll 5</Label>
             <TextBlock Width="200" Text="{Binding DiceFive}"></TextBlock>
-            <CheckBox Margin="80, 0"/>
-            <Button Style="{StaticResource Button}" Margin="100, 40" Content="Reroll selected dice"/>
+            <CheckBox IsChecked="{Binding ChangeDiceFive}" Margin="80, 0"/>
+            <Button Style="{StaticResource Button}" Margin="100, 40" Content="Reroll selected dice" Click="Reroll"/>
         </WrapPanel>
         <Frame x:Name="Sheet" Source="GameSheet.xaml" Width="300" Height="400"  Margin="10, 0, 0, 0"/>
 

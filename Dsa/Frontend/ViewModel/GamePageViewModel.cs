@@ -64,15 +64,21 @@ namespace Frontend.ViewModel
             set { SetProperty(ref _dicefive, value); }
         }
 
+        public bool ChangeDiceOne;
+        public bool ChangeDiceTwo;
+        public bool ChangeDiceThree;
+        public bool ChangeDiceFour;
+        public bool ChangeDiceFive;
+
+
         public async Task Roll()
         {
             Dices = await SettingsStore.YahtzeeManager.GetDiceAsync();
-            DiceOne = Dices[0];
-            DiceTwo = Dices[1];
-            DiceThree = Dices[2];
-            DiceFour = Dices[3];
-            DiceFive = Dices[4];
-
+            if(ChangeDiceOne == true) { DiceOne = Dices[0]; }
+            if (ChangeDiceTwo == true) { DiceTwo = Dices[1]; }
+            if (ChangeDiceThree == true) { DiceThree = Dices[2]; }
+            if (ChangeDiceFour == true) { DiceFour = Dices[3]; }
+            if (ChangeDiceFive == true) { DiceFive = Dices[4]; }
         }
     }
 }
