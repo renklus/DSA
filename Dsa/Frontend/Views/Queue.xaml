@@ -13,9 +13,11 @@
     </Page.Resources>
 
     <StackPanel>
-        <Button Style="{StaticResource Button}" VerticalAlignment="Center" Margin="0, 100, 0, 50" Content="Start a Game" Click="Button_Click"/>
+        <Label HorizontalContentAlignment="Center">Partner address:</Label>
+        <TextBox Name="PartnerAddress" Height="30" Width="200" Margin="10"></TextBox>
+        <Button Style="{StaticResource Button}" VerticalAlignment="Center" Content="Start a Game" Click="Button_Click"/>
         <Label HorizontalContentAlignment="Center">Join by GameID:</Label>
-        <TextBox Name="_gameid" Height="30" Width="200" Margin="10"></TextBox>
+        <TextBox Name="GameId" Height="30" Width="200" Margin="10"></TextBox>
         <Button Style="{StaticResource Button}" VerticalAlignment="Center" Content="Join Game" Click="Button_Click2"/>
     </StackPanel>
 </Page>
