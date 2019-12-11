@@ -17,7 +17,7 @@
         <Frame x:Name="ChatFrame" Source="Chat.xaml" Height="380" Width="310"/>
         <WrapPanel Orientation="Horizontal" Width="400">
             <Label>GameID:</Label>
-            <Label Content="{Binding GameId}"/>
+            <TextBox Text="{Binding GameId}" IsEnabled="False"/>
             <Label Style="{StaticResource GameLabel}">Dice Roll 1</Label>
             <TextBlock Width="200" Text="{Binding DiceOne}"></TextBlock>
             <CheckBox IsChecked="{Binding ChangeDiceOne}" Margin="80, 0"/>
