@@ -14,8 +14,8 @@
 
     <StackPanel>
         <Button Style="{StaticResource Button}" VerticalAlignment="Center" Margin="0, 100, 0, 50" Content="Start a Game" Click="Button_Click"/>
-
-        <TextBox Name="_gameid" Height="30" Width="200" Margin="20"></TextBox>
-        <Button Style="{StaticResource Button}" VerticalAlignment="Center" Margin="10" Content="Join Game" Click="Button_Click2"/>
+        <Label HorizontalContentAlignment="Center">Join by GameID:</Label>
+        <TextBox Name="_gameid" Height="30" Width="200" Margin="10"></TextBox>
+        <Button Style="{StaticResource Button}" VerticalAlignment="Center" Content="Join Game" Click="Button_Click2"/>
     </StackPanel>
 </Page>
