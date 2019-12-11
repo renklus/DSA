@@ -38,8 +38,9 @@ namespace Frontend.Views
 
         private async void Button_Click2(object sender, RoutedEventArgs e)
         {
+            SettingsStore.YahtzeeManager = new YahtzeeManager(Settings.Settings.PrivateKey);
             //todo Adresse nicht fix
-            await new YahtzeeManager(Settings.Settings.PrivateKey).JoinGameAsync(_gameid.Text);
+            await SettingsStore.YahtzeeManager.JoinGameAsync(_gameid.Text);
             Window game = new GamePage();
             game.Show();
         }
