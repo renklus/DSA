@@ -16,20 +16,28 @@ namespace HostGame
 
             var gameState = await manager.ThrowDiceAndGetGameAsync(true, true, true, true, true);
 
-            Console.Out.WriteLine($"Dice 1: {gameState.Dices[0]}");
-            Console.Out.WriteLine($"Dice 2: {gameState.Dices[1]}");
-            Console.Out.WriteLine($"Dice 3: {gameState.Dices[2]}");
-            Console.Out.WriteLine($"Dice 4: {gameState.Dices[3]}");
-            Console.Out.WriteLine($"Dice 5: {gameState.Dices[4]}");
+            for (int i = 0; i < 5; i++)
+            {
+                Console.Out.WriteLine($"Dice {gameState.Dices[i].Number}: {gameState.Dices[i].Value}");
+            }
 
             User user = new User()
             { Name = "-", PrivateKey = Settings.Settings.PrivateKey, Wallet = Settings.Settings.PrivateAddress };
             Score score = new Score() { Owner = user };
 
             await manager.ScoreAsync(score, gameState, ScoreIndex.Ones);
-            await manager.ScoreAsync(score, gameState, ScoreIndex.Twos);
+            //await manager.ScoreAsync(score, gameState, ScoreIndex.Twos);
 
-            //var gameState = await manager.ThrowDiceAndGetGameAsync(true, true, true, true, true);
+            await manager.ThrowDiceAndUpdateGameAsync(gameState, true, true, true, true, true);
+            await manager.ThrowDiceAndUpdateGameAsync(gameState, true, true, true, false, false);
+            await manager.ThrowDiceAndUpdateGameAsync(gameState, true, true, true, false, false);
+
+            await manager.ScoreAsync(score, gameState, ScoreIndex.Twos);
+            
+            await manager.ThrowDiceAndUpdateGameAsync(gameState, true, true, true, true, true);
+            await manager.ThrowDiceAndUpdateGameAsync(gameState, true, true, true, false, false);
+            await manager.ThrowDiceAndUpdateGameAsync(gameState, true, true, true, false, false);
+            await manager.ThrowDiceAndUpdateGameAsync(gameState, true, true, true, false, false);
 
         }
     }
