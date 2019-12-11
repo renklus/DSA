@@ -14,7 +14,7 @@
 
     
     <StackPanel Orientation="Horizontal">
-        <Frame x:Name="ChatFrame" Source="Views/Chat.xaml" Height="380" Width="310"/>
+        <Frame x:Name="ChatFrame" Source="Chat.xaml" Height="380" Width="310"/>
         <WrapPanel Orientation="Horizontal" Width="400">
             <Label Style="{StaticResource GameLabel}">Dice Roll 1</Label>
             <TextBlock Width="200" Text="{Binding DiceOne}"></TextBlock>
