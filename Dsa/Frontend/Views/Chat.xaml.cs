@@ -22,5 +22,15 @@ namespace Frontend.Views
         {
             InitializeComponent();
         }
+
+        private void SendMessage_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void RefreshMessages_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
