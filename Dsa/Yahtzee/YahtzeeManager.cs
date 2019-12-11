@@ -10,7 +10,6 @@ namespace Yahtzee
 {
     public class YahtzeeManager
     {
-        //private string _privateAddress = Settings.Settings.PrivateAddress;
         private string _url = Settings.Settings.Web3Url;
         private YahtzeeService _service;
         private byte _diceThrows = 0;
