@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -28,9 +29,9 @@ namespace Frontend.Views
             DataContext = new GamePageViewModel(game);
         }
 
-        private void Button_Click3(object sender, RoutedEventArgs e)
+        private async Task Button_Click3(object sender, RoutedEventArgs e)
         {
-            ((GamePageViewModel) DataContext).Roll();
+            await ((GamePageViewModel) DataContext).Roll();
         }
 
     }

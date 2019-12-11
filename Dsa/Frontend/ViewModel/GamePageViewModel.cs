@@ -27,7 +27,7 @@ namespace Frontend.ViewModel
         {
             this.CurrentGame = currentgame;
             this.GameId = SettingsStore.GameId;
-            Roll();
+            Roll().Wait();
         }
 
         private int _diceone;
