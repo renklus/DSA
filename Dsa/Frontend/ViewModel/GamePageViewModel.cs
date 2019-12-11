@@ -10,9 +10,6 @@ namespace Frontend.ViewModel
 {
     public class GamePageViewModel : BindableBase
     {
-
-        public int[] Dices = new int[5];
-
         private string _gameid;
 
         public string GameId
@@ -27,7 +24,6 @@ namespace Frontend.ViewModel
         {
             this.CurrentGame = currentgame;
             this.GameId = SettingsStore.GameId;
-            Roll().Wait();
         }
 
         private int _diceone;
@@ -65,22 +61,31 @@ namespace Frontend.ViewModel
             set { SetProperty(ref _dicefive, value); }
         }
 
-        public bool ChangeDiceOne;
-        public bool ChangeDiceTwo;
-        public bool ChangeDiceThree;
-        public bool ChangeDiceFour;
-        public bool ChangeDiceFive;
+        public bool ChangeDiceOne = true;
+        public bool ChangeDiceTwo = true;
+        public bool ChangeDiceThree = true;
+        public bool ChangeDiceFour = true;
+        public bool ChangeDiceFive = true;
 
-
-        public async Task Roll()
+        
+        public async Task Reroll()
         {
-            Dices = await SettingsStore.YahtzeeManager.GetDiceAsync();
-            if(ChangeDiceOne == true) { DiceOne = Dices[0]; }
-            if (ChangeDiceTwo == true) { DiceTwo = Dices[1]; }
-            if (ChangeDiceThree == true) { DiceThree = Dices[2]; }
-            if (ChangeDiceFour == true) { DiceFour = Dices[3]; }
-            if (ChangeDiceFive == true) { DiceFive = Dices[4]; }
-        }
+            try
+            {
+                var result = await SettingsStore.YahtzeeManager.ThrowDiceAsync(ChangeDiceOne, ChangeDiceTwo, ChangeDiceThree,
+                       ChangeDiceFour, ChangeDiceFive);
 
+                DiceOne = result[0];
+                DiceTwo = result[1];
+                DiceThree = result[2];
+                DiceFour = result[3];
+                DiceFive = result[4];
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
     }
 }

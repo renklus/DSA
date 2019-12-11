@@ -31,7 +31,7 @@ namespace Frontend.Views
 
         private async void Button_Click3(object sender, RoutedEventArgs e)
         {
-            await ((GamePageViewModel) DataContext).Roll();
+            await ((GamePageViewModel) DataContext).Reroll();
         }
 
     }
