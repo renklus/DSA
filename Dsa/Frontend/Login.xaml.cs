@@ -30,6 +30,7 @@ namespace Frontend
 
         private void UserLogin(object sender, RoutedEventArgs e)
         {
+            SettingsStore.PrivateKey = Pk.Text;
             Window game = new Menu();
             game.Show();
         }

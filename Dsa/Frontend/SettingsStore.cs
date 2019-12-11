@@ -9,5 +9,6 @@ namespace Frontend
     {
         public static YahtzeeManager YahtzeeManager { get; set; }
         public static string GameId { get; set; }
+        public static string PrivateKey { get; set; }
     }
 }

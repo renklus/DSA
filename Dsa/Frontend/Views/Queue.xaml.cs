@@ -28,7 +28,7 @@ namespace Frontend.Views
 
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            SettingsStore.YahtzeeManager = new YahtzeeManager(Settings.Settings.PrivateKey);
+            SettingsStore.YahtzeeManager = new YahtzeeManager(SettingsStore.PrivateKey);
             //Example Address: "0x08c31473a219f22922f47f001611d8bac62fbb6d"
             var gameId = await SettingsStore.YahtzeeManager.StartGameAsync(PartnerAddress.Text);
             SettingsStore.GameId = gameId;
@@ -38,7 +38,7 @@ namespace Frontend.Views
 
         private async void Button_Click2(object sender, RoutedEventArgs e)
         {
-            SettingsStore.YahtzeeManager = new YahtzeeManager(Settings.Settings.PrivateKey);
+            SettingsStore.YahtzeeManager = new YahtzeeManager(SettingsStore.PrivateKey);
             //todo Adresse nicht fix
             await SettingsStore.YahtzeeManager.JoinGameAsync(GameId.Text);
             Window game = new GamePage();
