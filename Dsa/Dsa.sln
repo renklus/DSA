@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Settings", "Settings\Settin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YahtzeeContract", "YahtzeeContract\YahtzeeContract.csproj", "{8663B309-B26F-48C9-B548-86CBF65F75E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yahtzee", "Yahtzee\Yahtzee.csproj", "{DA0084B6-4ED9-4C09-812C-D602BB9D4AF1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yahtzee", "Yahtzee\Yahtzee.csproj", "{DA0084B6-4ED9-4C09-812C-D602BB9D4AF1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HostGame", "HostGame\HostGame.csproj", "{D2CC3113-CF13-4FF8-9445-DED92FD5F8F1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{DA0084B6-4ED9-4C09-812C-D602BB9D4AF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA0084B6-4ED9-4C09-812C-D602BB9D4AF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA0084B6-4ED9-4C09-812C-D602BB9D4AF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2CC3113-CF13-4FF8-9445-DED92FD5F8F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2CC3113-CF13-4FF8-9445-DED92FD5F8F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2CC3113-CF13-4FF8-9445-DED92FD5F8F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2CC3113-CF13-4FF8-9445-DED92FD5F8F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
