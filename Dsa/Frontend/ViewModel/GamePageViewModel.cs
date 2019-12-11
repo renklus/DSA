@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Frontend.Views;
 using Yahtzee;
 
@@ -9,9 +10,11 @@ namespace Frontend.ViewModel
     public class GameViewPageModel : BindableBase
     {
 
+        public int[] Dices = new int[5];
+
         private string _gameid;
 
-        public string GameID
+        public string GameId
         {
             get { return _gameid; }
             set { SetProperty(ref _gameid, value); }
@@ -22,6 +25,8 @@ namespace Frontend.ViewModel
         public GameViewPageModel(Game currentgame)
         {
             this.CurrentGame = currentgame;
+            this.GameId = SettingsStore.GameId;
+            Roll();
         }
 
         private int _diceone;
@@ -59,8 +64,14 @@ namespace Frontend.ViewModel
             set { SetProperty(ref _dicefive, value); }
         }
 
-        public void Roll()
+        public async Task Roll()
         {
+            Dices = await SettingsStore.YahtzeeManager.GetDiceAsync();
+            DiceOne = Dices[0];
+            DiceTwo = Dices[1];
+            DiceThree = Dices[2];
+            DiceFour = Dices[3];
+            DiceFive = Dices[4];
 
         }
     }
