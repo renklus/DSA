@@ -29,7 +29,6 @@ namespace Frontend.Views
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
             SettingsStore.YahtzeeManager = new YahtzeeManager(SettingsStore.PrivateKey);
-            //Example Address: "0x08c31473a219f22922f47f001611d8bac62fbb6d"
             var gameId = await SettingsStore.YahtzeeManager.StartGameAsync(PartnerAddress.Text);
             SettingsStore.GameId = gameId;
             Window game = new GamePage();

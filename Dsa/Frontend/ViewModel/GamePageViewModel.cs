@@ -107,22 +107,15 @@ namespace Frontend.ViewModel
         public async Task Reroll()
         {
             ButtonEnabled = false;
-            try
-            {
-                var result = await SettingsStore.YahtzeeManager.ThrowDiceAsync(ChangeDiceOne, ChangeDiceTwo, ChangeDiceThree,
-                       ChangeDiceFour, ChangeDiceFive);
 
-                DiceOne = result[0];
-                DiceTwo = result[1];
-                DiceThree = result[2];
-                DiceFour = result[3];
-                DiceFive = result[4];
-            }
-            catch (Exception ex)
-            {
+            var result = await SettingsStore.YahtzeeManager.ThrowDiceAsync(ChangeDiceOne, ChangeDiceTwo, ChangeDiceThree,
+                   ChangeDiceFour, ChangeDiceFive);
 
-                throw;
-            }
+            DiceOne = result[0];
+            DiceTwo = result[1];
+            DiceThree = result[2];
+            DiceFour = result[3];
+            DiceFive = result[4];
 
             ButtonEnabled = true;
         }
