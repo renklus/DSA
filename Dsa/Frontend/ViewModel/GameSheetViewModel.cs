@@ -116,19 +116,19 @@ namespace Frontend.ViewModel
 
         public void Load(Score score)
         {
-            Ones = Score.Ones;
-            Twos = Score.Twos;
-            Threes = Score.Threes;
-            Fours = Score.Fours;
-            Fives = Score.Fives;
-            Sixes = Score.Sixes;
-            ThreeOfAKind = Score.ThreeOfAKind;
-            FourOfAKind = Score.FourOfAKind;
-            FullHouse = Score.FullHouse;
-            LowStraight = Score.SmallStreet;
-            HighStraight = Score.LargeStreet;
-            Yahtzee = Score.Yahtzee;
-            Chance = Score.Chance;
+            Ones = score.Ones;
+            Twos = score.Twos;
+            Threes = score.Threes;
+            Fours = score.Fours;
+            Fives = score.Fives;
+            Sixes = score.Sixes;
+            ThreeOfAKind = score.ThreeOfAKind;
+            FourOfAKind = score.FourOfAKind;
+            FullHouse = score.FullHouse;
+            LowStraight = score.SmallStreet;
+            HighStraight = score.LargeStreet;
+            Yahtzee = score.Yahtzee;
+            Chance = score.Chance;
         }
 
         public void Save()
