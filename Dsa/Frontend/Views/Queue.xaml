@@ -12,7 +12,10 @@
         <ResourceDictionary Source="/Styles/Styles.xaml"/>
     </Page.Resources>
 
-    <Grid>
-        <Button Style="{StaticResource Button}" VerticalAlignment="Center" Margin="20" Content="Queue for a Game" Click="Button_Click"/>
-    </Grid>
+    <StackPanel>
+        <Button Style="{StaticResource Button}" VerticalAlignment="Center" Margin="0, 100, 0, 50" Content="Start a Game" Click="Button_Click"/>
+
+        <TextBox Name="_gameid" Height="30" Width="200" Margin="20"></TextBox>
+        <Button Style="{StaticResource Button}" VerticalAlignment="Center" Margin="10" Content="Join Game" Click="Button_Click2"/>
+    </StackPanel>
 </Page>
