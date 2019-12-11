@@ -9,6 +9,13 @@ namespace Frontend.ViewModel
     public class GameViewPageModel : BindableBase
     {
 
+        private string _gameid;
+
+        public string GameID
+        {
+            get { return _gameid; }
+            set { SetProperty(ref _gameid, value); }
+        }
 
         public Game CurrentGame { get; set; }
 
