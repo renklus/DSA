@@ -27,5 +27,6 @@ namespace Frontend.Views
             Game game = new Game();
             DataContext = new GameViewPageModel(game);
         }
+
     }
 }

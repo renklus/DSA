@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using Frontend.Views;
 using Yahtzee;
 
@@ -79,6 +80,11 @@ namespace Frontend.ViewModel
             if (ChangeDiceThree == true) { DiceThree = Dices[2]; }
             if (ChangeDiceFour == true) { DiceFour = Dices[3]; }
             if (ChangeDiceFive == true) { DiceFive = Dices[4]; }
+        }
+
+        private void Button_Click3(object sender, RoutedEventArgs e)
+        {
+            Roll();
         }
     }
 }
