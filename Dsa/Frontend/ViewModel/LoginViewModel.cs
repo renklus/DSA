@@ -45,7 +45,7 @@ namespace Frontend.ViewModel
         {
             User.Name = Name;
             User.Wallet = Wallet;
-            User.PrivateKey = PrivateKey;
+            User.PrivateKey = PrivateKey.ToString();
 
             OnSave?.Invoke(User);
         }
