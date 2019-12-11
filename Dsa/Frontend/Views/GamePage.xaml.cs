@@ -25,7 +25,12 @@ namespace Frontend.Views
             InitializeComponent();
 
             Game game = new Game();
-            DataContext = new GameViewPageModel(game);
+            DataContext = new GamePageViewModel(game);
+        }
+
+        private void Button_Click3(object sender, RoutedEventArgs e)
+        {
+            ((GamePageViewModel) DataContext).Roll();
         }
 
     }

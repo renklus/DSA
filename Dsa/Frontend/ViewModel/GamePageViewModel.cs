@@ -8,7 +8,7 @@ using Yahtzee;
 
 namespace Frontend.ViewModel
 {
-    public class GameViewPageModel : BindableBase
+    public class GamePageViewModel : BindableBase
     {
 
         public int[] Dices = new int[5];
@@ -23,7 +23,7 @@ namespace Frontend.ViewModel
 
         public Game CurrentGame { get; set; }
 
-        public GameViewPageModel(Game currentgame)
+        public GamePageViewModel(Game currentgame)
         {
             this.CurrentGame = currentgame;
             this.GameId = SettingsStore.GameId;
@@ -82,9 +82,5 @@ namespace Frontend.ViewModel
             if (ChangeDiceFive == true) { DiceFive = Dices[4]; }
         }
 
-        private void Button_Click3(object sender, RoutedEventArgs e)
-        {
-            Roll();
-        }
     }
 }
