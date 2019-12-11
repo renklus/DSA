@@ -25,12 +25,12 @@ namespace Frontend.Views
 
         private void SendMessage_Click(object sender, RoutedEventArgs e)
         {
-
+            SettingsStore.YahtzeeManager.SendMessageAsync(Message.Text);
         }
 
         private void RefreshMessages_Click(object sender, RoutedEventArgs e)
         {
-
+            ReceivedMessage.Content = SettingsStore.YahtzeeManager.ReceiveMessageAsync();
         }
     }
 }
