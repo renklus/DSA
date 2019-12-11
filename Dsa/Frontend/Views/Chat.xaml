@@ -10,6 +10,14 @@
 
     <StackPanel Orientation="Vertical">
         <TextBlock Text="Chat"/>
-
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Erhaltene Nachricht: " Width="200"/>
+            <Label Content="---" x:Name="ReceivedMessage" Width="440" />
+            <Button Margin="20,0" Name="RefreshMessages" Content="Nachrichten aktualisieren" Click="RefreshMessages_Click"></Button>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBox Name="Message" Width="500"></TextBox>
+            <Button Margin="20,0" Name="SendMessage" Content="Nachricht Senden" Click="SendMessage_Click"></Button>
+        </StackPanel>
     </StackPanel>
 </Page>
