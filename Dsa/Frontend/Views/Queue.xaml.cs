@@ -29,11 +29,8 @@ namespace Frontend.Views
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
             //todo Adresse nicht fix
-            //Private Key nicht aus Settings sondern aus Login-Maske
-            var gameId = await new YahtzeeManager(Settings.Settings.PrivateKey).StartGameAsync("0x08c31473a219f22922f47f001611d8bac62fbb6d");
-
-            //oder Join
-            await new YahtzeeManager(Settings.Settings.PrivateKey).JoinGameAsync(gameId);
+            await new YahtzeeManager(Settings.Settings.PrivateKey).StartGameAsync("0x08c31473a219f22922f47f001611d8bac62fbb6d");
+            
         }
     }
 }

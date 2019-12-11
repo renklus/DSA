@@ -8,6 +8,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Frontend.ViewModel;
 using Yahtzee;
@@ -29,7 +30,8 @@ namespace Frontend
 
         private void UserLogin(object sender, RoutedEventArgs e)
         {
-            
+            Window game = new Menu();
+            game.Show();
         }
     }
 }
